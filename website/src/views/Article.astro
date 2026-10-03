@@ -1,0 +1,73 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import Photo from "../components/Photo.astro";
+import NewsCard from "../components/NewsCard.astro";
+import { render } from "astro:content";
+import { t, url, formatDate, languages, type Lang } from "../i18n";
+import { newsUrl } from "../i18n/routes";
+import { getNews, type Article } from "../lib/news";
+import { site } from "../data/site";
+import { findImage } from "../data/images";
+import { getImage } from "astro:assets";
+
+interface Props { article: Article }
+const { article } = Astro.props;
+const { lang, slug, data } = article;
+const d = t(lang);
+const N = d.newsPage;
+const { Content } = await render(article);
+
+// Link to the same article in the other language, if it exists
+const langLinks: { lang: Lang; href: string }[] = [];
+for (const l of languages) {
+  const list = l === lang ? [article] : await getNews(l);
+  if (list.some((a) => a.slug === slug)) langLinks.push({ lang: l, href: newsUrl(l, slug) });
+}
+const more = (await getNews(lang)).filter((a) => a.slug !== slug).slice(0, 3);
+
+const img = data.image ? findImage(data.image) : undefined;
+const ldImage = img ? new URL((await getImage({ src: img, width: 1200, format: "jpg" })).src, site.url).href : undefined;
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  headline: data.title,
+  description: data.description,
+  datePublished: data.date.toISOString(),
+  inLanguage: lang,
+  ...(ldImage && { image: [ldImage] }),
+  author: { "@type": "Organization", name: "MASOK Academy", url: site.url },
+  publisher: { "@type": "Organization", name: "MASOK Academy", logo: { "@type": "ImageObject", url: `${site.url}/favicon.png` } },
+  mainEntityOfPage: new URL(newsUrl(lang, slug), site.url).href,
+};
+---
+
+<Base lang={lang} title={`${data.title} | ${d.siteName}`} description={data.description} langLinks={langLinks} ogImage={data.image} ogType="article" jsonLd={[articleLd]}>
+  <PageHead lang={lang} title={data.title} crumbs={[[N.title, url(lang, "news")], [data.title]]} />
+
+  <section class="section">
+    <div class="container narrow">
+      <article class="article">
+        <p class="news-meta">
+          <span class="tag">{data.category}</span>
+          <time datetime={data.date.toISOString().slice(0, 10)}>{formatDate(data.date, lang)}</time>
+        </p>
+        {data.image && <Photo name={data.image} alt={data.imageAlt} class="media ratio-16-9" sizes="(max-width: 820px) 100vw, 790px" priority />}
+        <p class="lead">{data.description}</p>
+        <div class="prose"><Content /></div>
+        <p style="margin-top:36px"><a class="btn btn-navy btn-sm" href={url(lang, "news")}>← {N.back}</a></p>
+      </article>
+    </div>
+  </section>
+
+  {
+    more.length > 0 && (
+      <section class="section bg-soft">
+        <div class="container">
+          <h2 class="section-title">{N.moreTitle}</h2>
+          <div class="grid grid-3">{more.map((a) => <NewsCard article={a} />)}</div>
+        </div>
+      </section>
+    )
+  }
+</Base>

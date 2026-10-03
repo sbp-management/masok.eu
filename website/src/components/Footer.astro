@@ -1,0 +1,66 @@
+---
+import Icon from "./Icon.astro";
+import { t, url, type Lang, type PageKey } from "../i18n";
+import { site } from "../data/site";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const a = site.address;
+const maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${a.name}, ${a.street}, ${a.postalCode} ${a.city}, ${a.country}`);
+const tel = (n: string) => "tel:" + n.replace(/[^\d+]/g, "");
+const quick: PageKey[] = ["courses", "applicants", "news", "about", "contact"];
+const navLabel = (p: PageKey) => {
+  for (const item of d.nav) if (item.page === p) return item.label;
+  return p;
+};
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2>{d.footer.contactTitle}</h2>
+        <ul class="contact-lines">
+          <li><Icon name="phone" /><a href={tel(site.phone)}>{site.phone}</a></li>
+          <li><Icon name="mail" /><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><Icon name="pin" /><a href={maps} target="_blank" rel="noopener">{a.name}, {a.street}, {a.postalCode} {a.city}</a></li>
+        </ul>
+        <div class="socials" aria-label={d.footer.followUs}>
+          <a href={site.social.facebook} target="_blank" rel="noopener" aria-label="Facebook"><Icon name="facebook" /></a>
+          <a href={site.social.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+        </div>
+      </div>
+
+      <div>
+        <h2>{d.footer.linksTitle}</h2>
+        <ul class="links">
+          {quick.map((p) => <li><a href={url(lang, p)}>{navLabel(p)}</a></li>)}
+          {lang === "en" && <li><a href={url("en", "partners")}>{navLabel("partners")}</a></li>}
+        </ul>
+      </div>
+
+      {
+        site.hours && (
+          <div>
+            <h2>{d.footer.hoursTitle}</h2>
+            <dl class="hours">
+              {site.hours.map((h) => (
+                <>
+                  <dt>{h.days[lang]}</dt>
+                  <dd>{h.hours}</dd>
+                </>
+              ))}
+            </dl>
+          </div>
+        )
+      }
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {year} {site.legal.entity}. {d.footer.rights}</span>
+      <a href={url(lang, "privacy")}>{d.footer.privacy}</a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "masok-website",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "website", "run", "dev", "--", "--port", "4321"],
+      "port": 4321
+    },
+    {
+      "name": "masok-prototype",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["prototype/serve.js"],
+      "port": 8080
+    }
+  ]
+}

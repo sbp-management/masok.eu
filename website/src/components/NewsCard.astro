@@ -1,0 +1,27 @@
+---
+import Photo from "./Photo.astro";
+import { formatDate, t } from "../i18n";
+import { newsUrl } from "../i18n/routes";
+import type { Article } from "../lib/news";
+
+interface Props { article: Article; headingLevel?: "h2" | "h3" }
+const { article, headingLevel = "h3" } = Astro.props;
+const { data, lang, slug } = article;
+const d = t(lang);
+const H = headingLevel;
+---
+
+<article class="card news-card" data-cat={data.category}>
+  <div class="img-wrap">
+    <Photo name={data.image ?? "hero-instruments"} alt="" class="media ratio-16-9" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 380px" widths={[400, 700, 900]} />
+  </div>
+  <div class="body">
+    <p class="news-meta">
+      <span class="tag">{data.category}</span>
+      <time datetime={data.date.toISOString().slice(0, 10)}>{formatDate(data.date, lang)}</time>
+    </p>
+    <H><a href={newsUrl(lang, slug)}>{data.title}</a></H>
+    <p class="excerpt">{data.description}</p>
+    <span class="more" aria-hidden="true">{d.ui.readMore} →</span>
+  </div>
+</article>

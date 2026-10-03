@@ -1,0 +1,136 @@
+---
+import Base from "../layouts/Base.astro";
+import Photo from "../components/Photo.astro";
+import Icon from "../components/Icon.astro";
+import Form from "../components/Form.astro";
+import { t, type Lang } from "../i18n";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const P = d.partners;
+---
+
+<Base lang={lang} page="partners" title={d.meta.partners.title} description={d.meta.partners.description} ogImage="partners-hero">
+  <section class="hero">
+    <Photo name="partners-hero" alt="" class="hero-bg" sizes="100vw" widths={[640, 1024, 1600, 2200]} priority />
+    <div class="container">
+      <h1>{P.title}</h1>
+      <p class="hero-sub">{P.subtitle}</p>
+      {P.lines.map((l) => <p class="hero-line">{l}</p>)}
+      <div class="btn-row">
+        <a class="btn btn-yellow" href="#inquiry">{P.buttons[0]}</a>
+        <a class="btn btn-outline" href="#inquiry">{P.buttons[1]}</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container stats">
+    <div class="grid grid-4">
+      {P.stats.map((s) => (
+        <div class="card stat">
+          <div class="icon-box icon-yellow"><Icon name={s.icon} /></div>
+          <h3>{s.title}</h3>
+          {s.lines.map((l) => <p>{l}</p>)}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <section class="section bg-navy" style="margin-top:72px">
+    <div class="container">
+      <h2 class="section-title">{P.servicesTitle}</h2>
+      {P.services.map((s, i) => (
+        <div class:list={["service", { reverse: i % 2 === 1 }]}>
+          <div class="service-text">
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+            <a class="btn btn-navy btn-sm" href={`#${s.target}`}>{d.ui.learnMore}</a>
+          </div>
+          <Photo name={s.image} alt="" class="media" sizes="(max-width: 700px) 100vw, 470px" widths={[400, 700, 950]} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section bg-yellow" id="meetings">
+    <div class="container">
+      <h2 class="section-title">{P.meetingsTitle}</h2>
+      <div class="lead-text">{P.meetingsText.map((p) => <p>{p}</p>)}</div>
+      <div class="grid grid-3">
+        {P.packages.map((k) => (
+          <div class="package">
+            <p class="tag-line">{k.tag}</p>
+            <h3>{k.title}</h3>
+            <p class="lead">{k.lead}</p>
+            <ul>{k.items.map((i) => <li>{i}</li>)}</ul>
+            <p class="price">{P.priceNote}</p>
+          </div>
+        ))}
+      </div>
+      <div class="grid grid-2 extras">
+        {P.extras.map((x) => (
+          <div>
+            <h3>{x.title}</h3>
+            <ul>{x.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="consulting">
+    <div class="container">
+      <h2 class="section-title">{P.consultingTitle}</h2>
+      <div class="lead-text">{P.consultingText.map((p) => <p>{p}</p>)}</div>
+      <ol class="grid grid-4" style="list-style:none;padding:0">
+        {P.consultingSteps.map(([title, text], i) => (
+          <li class="card num-card"><div class="big" aria-hidden="true">{i + 1}</div><h3>{title}</h3><p>{text}</p></li>
+        ))}
+      </ol>
+      <h3 class="center" style="margin:56px 0 24px;font-size:1.3rem;color:var(--navy)">{P.includesTitle}</h3>
+      <ul class="includes">
+        {P.includes.map((i) => <li><Icon name="check" /><span>{i}</span></li>)}
+      </ul>
+      <p class="center">{P.includesNote}</p>
+      <p class="center"><a class="btn btn-navy" href="#inquiry">{P.buttons[1]}</a></p>
+    </div>
+  </section>
+
+  <section class="section bg-soft">
+    <div class="container">
+      <h2 class="section-title">{P.whyTitle}</h2>
+      <div class="grid grid-4">
+        {P.why.map(([title, text]) => <div class="card why-item"><h3>{title}</h3><p>{text}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-navy">
+    <div class="container center">
+      <h2 class="section-title">{P.accessTitle}</h2>
+      <div class="lead-text" style="margin-bottom:0">{P.accessText.map((p) => <p>{p}</p>)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">{P.processTitle}</h2>
+      <ol class="grid grid-4" style="list-style:none;padding:0">
+        {P.process.map(([title, text], i) => (
+          <li class="card num-card"><div class="big" aria-hidden="true">{i + 1}</div><h3>{title}</h3><p>{text}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section bg-soft" id="inquiry">
+    <div class="container narrow">
+      <h2 class="section-title" style="margin-bottom:12px">{P.formTitle}</h2>
+      <p class="lead-text">{P.formLead}</p>
+      <div class="form-card">
+        <Form lang={lang} kind="partner" />
+      </div>
+    </div>
+  </section>
+</Base>

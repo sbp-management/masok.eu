@@ -1,0 +1,84 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import Photo from "../components/Photo.astro";
+import Icon from "../components/Icon.astro";
+import Form from "../components/Form.astro";
+import { t, url, fill, type Lang } from "../i18n";
+import { courseKeys } from "../i18n/routes";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const A = d.applicants;
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: A.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+};
+---
+
+<Base lang={lang} page="applicants" title={d.meta.applicants.title} description={d.meta.applicants.description} jsonLd={[faqLd]}>
+  <PageHead lang={lang} title={A.title} crumbs={[[A.title]]} />
+
+  <section class="section bg-soft">
+    <div class="container">
+      <h2 class="section-title">{A.overviewTitle}</h2>
+      <div class="grid grid-4">
+        {courseKeys.map((k) => (
+          <article class="card overview-card">
+            <Photo name={d.courses[k].image} alt="" class="media ratio-4-3" sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 280px" widths={[400, 600, 800]} />
+            <div class="body">
+              <h3><a href={url(lang, k)}>{d.courses[k].title}</a></h3>
+              <ul>{A.overview[k].map((i) => <li>{fill(i, lang)}</li>)}</ul>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-navy">
+    <div class="container center">
+      <h2 class="section-title">{A.stepsTitle}</h2>
+      <ol class="steps-list">
+        {A.steps.map((s, i) => <li><span class="step-num" aria-hidden="true">{i + 1}</span><span>{s}</span></li>)}
+      </ol>
+      <a class="btn btn-white" href="#apply">{A.applyButton}</a>
+    </div>
+  </section>
+
+  <section class="section bg-yellow">
+    <div class="container">
+      <h2 class="section-title">{A.getTitle}</h2>
+      <ul class="check-list">
+        {A.get.map((g) => <li><Icon name="check" /><span>{g}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title" style="color:var(--navy)">{A.faqTitle}</h2>
+      <div class="faq">
+        {A.faq.map(([q, a]) => (
+          <details>
+            <summary>{q}</summary>
+            <p>{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-soft" id="apply">
+    <div class="container narrow">
+      <h2 class="section-title" style="margin-bottom:12px">{A.formTitle}</h2>
+      <p class="lead-text">{A.formLead}</p>
+      <div class="form-card">
+        <Form lang={lang} kind="course" id="apply-form" />
+      </div>
+    </div>
+  </section>
+</Base>

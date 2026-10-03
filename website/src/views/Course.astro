@@ -1,0 +1,94 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import Photo from "../components/Photo.astro";
+import Form from "../components/Form.astro";
+import { t, url, fill, type Lang } from "../i18n";
+import { courseKeys, type CourseKey } from "../i18n/routes";
+import { site } from "../data/site";
+
+interface Props { lang: Lang; course: CourseKey }
+const { lang, course } = Astro.props;
+const d = t(lang);
+const c = d.courses[course];
+const meta = d.meta[course];
+const subtitle = "subtitle" in c ? (c.subtitle as string) : undefined;
+
+const courseLd = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  name: c.title,
+  description: meta.description,
+  inLanguage: lang,
+  provider: { "@type": "EducationalOrganization", name: "MASOK Academy", url: site.url },
+  ...(course !== "german" && {
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "Onsite",
+      courseWorkload: "P9M",
+      location: { "@type": "Place", name: site.address.name, address: `${site.address.street}, ${site.address.postalCode} ${site.address.city}` },
+    },
+  }),
+};
+---
+
+<Base lang={lang} page={course} title={meta.title} description={meta.description} ogImage={c.image} jsonLd={[courseLd]}>
+  <PageHead lang={lang} title={c.title} subtitle={subtitle} crumbs={[[d.coursesPage.title, url(lang, "courses")], [c.title]]} />
+
+  <section class="section">
+    <div class="container course-layout">
+      <aside class="course-side">
+        <nav aria-label={d.coursesPage.sidebarLabel}>
+          <ul class="side-menu">
+            {courseKeys.map((k) => (
+              <li><a href={url(lang, k)} aria-current={k === course ? "page" : undefined}>{d.courses[k].title}</a></li>
+            ))}
+          </ul>
+        </nav>
+        <div class="form-card side-form">
+          {c.form === "mfa" ? (
+            <h2>{d.forms.mfaTitle}</h2>
+          ) : (
+            <>
+              <h2>{d.forms.courseFormTitle}</h2>
+              <p class="form-lead">{d.forms.courseFormLead}</p>
+            </>
+          )}
+          <Form lang={lang} kind={c.form === "mfa" ? "mfa" : "course"} course={course} />
+        </div>
+      </aside>
+
+      <article class="course-main">
+        <Photo name={c.image} alt={c.title} class="media ratio-16-9" sizes="(max-width: 960px) 100vw, 760px" priority />
+        <div class="intro" style="margin-top:24px">
+          {c.intro.map((p) => <p>{fill(p, lang)}</p>)}
+        </div>
+        {c.blocks.map((b) => (
+          <>
+            <h2>{b.title}</h2>
+            <ul class="info-list">
+              {b.items.map((it) =>
+                Array.isArray(it) ? (
+                  <li><span class="k">{it[0]}</span><span>{fill(it[1], lang)}</span></li>
+                ) : (
+                  <li class="plain">{fill(it, lang)}</li>
+                ),
+              )}
+            </ul>
+          </>
+        ))}
+        {c.why && (
+          <>
+            <h2>{c.whyTitle}</h2>
+            <p>{c.why}</p>
+          </>
+        )}
+        {c.gallery.length > 0 && (
+          <div class="gallery">
+            {c.gallery.map((g) => <Photo name={g} alt="" class="media ratio-4-3" sizes="(max-width: 600px) 100vw, 380px" widths={[400, 700, 900]} />)}
+          </div>
+        )}
+      </article>
+    </div>
+  </section>
+</Base>

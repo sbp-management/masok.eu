@@ -1,0 +1,103 @@
+---
+import Icon from "./Icon.astro";
+import { t, url, languages, type Lang, type PageKey } from "../i18n";
+import { findImage } from "../data/images";
+import { Image } from "astro:assets";
+
+interface Props {
+  lang: Lang;
+  page?: PageKey;
+  langLinks: { lang: Lang; href: string }[];
+}
+const { lang, page, langLinks } = Astro.props;
+const d = t(lang);
+const logo = findImage("logo");
+
+const isActive = (p: string) => p === page || (p === "news" && Astro.url.pathname.startsWith(url(lang, "news")) && page === undefined);
+---
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href={url(lang, "home")} aria-label={`${d.siteName} – ${d.ui.home}`}>
+      {logo ? <Image src={logo} alt="MASOK" height={44} densities={[1, 2]} loading="eager" /> : <span>MASOK</span>}
+    </a>
+
+    <nav class="main-nav" id="main-nav" aria-label={d.ui.mainNav}>
+      <ul>
+        {
+          d.nav.map((item) => {
+            const children = "children" in item ? item.children : undefined;
+            const active = isActive(item.page) || (children ?? []).some((c) => c.page === page);
+            const current = item.page === page ? "page" : undefined;
+            return children ? (
+              <li class="has-dropdown">
+                <div class="nav-row">
+                  <a href={url(lang, item.page as PageKey)} class:list={{ active }} aria-current={current}>{item.label}</a>
+                  <button class="sub-toggle" type="button" aria-expanded="false" aria-controls={`sub-${item.page}`} aria-label={d.ui.openSubmenu}>
+                    <Icon name="chevron" />
+                  </button>
+                </div>
+                <ul class="dropdown" id={`sub-${item.page}`}>
+                  {children.map((c) => (
+                    <li><a href={url(lang, c.page as PageKey)} aria-current={c.page === page ? "page" : undefined}>{c.label}</a></li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li><a href={url(lang, item.page as PageKey)} class:list={{ active }} aria-current={current}>{item.label}</a></li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+
+    <ul class="lang-switch" aria-label={d.ui.languageLabel}>
+      {
+        languages.map((l) => {
+          const href = langLinks.find((x) => x.lang === l)?.href ?? url(l, "home");
+          return (
+            <li>
+              <a href={href} hreflang={t(l).htmlLang} lang={t(l).htmlLang} aria-current={l === lang ? "true" : undefined} title={d.ui.langNames[l]}>
+                {l.toUpperCase()}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label={d.ui.menu} data-open-label={d.ui.menu} data-close-label={d.ui.closeMenu}>
+      <span class="icon-open"><Icon name="menu" /></span>
+      <span class="icon-close" hidden><Icon name="close" /></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const body = document.body;
+  const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const nav = document.getElementById("main-nav");
+
+  function setOpen(open: boolean) {
+    if (!toggle) return;
+    body.classList.toggle("nav-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", (open ? toggle.dataset.closeLabel : toggle.dataset.openLabel) ?? "");
+    toggle.querySelector<HTMLElement>(".icon-open")!.hidden = open;
+    toggle.querySelector<HTMLElement>(".icon-close")!.hidden = !open;
+  }
+
+  toggle?.addEventListener("click", () => setOpen(!body.classList.contains("nav-open")));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && body.classList.contains("nav-open")) { setOpen(false); toggle?.focus(); }
+  });
+  nav?.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest("a")) setOpen(false); });
+
+  document.querySelectorAll<HTMLButtonElement>(".sub-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const li = btn.closest(".has-dropdown")!;
+      const open = li.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  });
+</script>

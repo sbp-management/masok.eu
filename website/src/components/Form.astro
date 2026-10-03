@@ -1,0 +1,280 @@
+---
+/**
+ * All website forms, handled by Netlify Forms (no server needed).
+ * Netlify finds them in the built HTML by `data-netlify="true"` and their `name`.
+ * Each form name must always have the same fields, in every language:
+ *
+ *   course-application  – course pages (except MFA) and the applicants page
+ *   mfa-application     – MFA course page (Europass CV required)
+ *   contact             – contact page
+ *   partner-inquiry     – German partners page
+ *
+ * Email notifications per form are set up in the Netlify dashboard (see README).
+ */
+import Icon from "./Icon.astro";
+import { t, url, type Lang } from "../i18n";
+import { courseKeys, type CourseKey } from "../i18n/routes";
+import { site } from "../data/site";
+
+type Kind = "course" | "mfa" | "contact" | "partner";
+interface Props { lang: Lang; kind: Kind; course?: CourseKey; id?: string }
+
+const { lang, kind, course, id = `form-${kind}` } = Astro.props;
+const f = t(lang).forms;
+const names: Record<Kind, string> = { course: "course-application", mfa: "mfa-application", contact: "contact", partner: "partner-inquiry" };
+const formName = names[kind];
+const fid = (n: string) => `${id}-${n}`;
+const accept = ".pdf,.doc,.docx,.odt,.jpg,.jpeg,.png";
+const extLinks: Record<string, string> = { applicationForm: site.applicationFormUrl, europass: site.europassCv };
+---
+
+{
+  kind === "mfa" && (
+    <ol class="mfa-steps">
+      {f.mfaSteps.map((s) => (
+        <li>
+          <p>{s.text}</p>
+          {s.button && s.link === "europass" && (
+            <a class="btn btn-yellow btn-sm" href={extLinks[s.link]} download><Icon name="download" />{s.button}</a>
+          )}
+          {s.button && s.link === "applicationForm" && (
+            <a class="btn btn-yellow btn-sm" href={extLinks[s.link]} target="_blank" rel="noopener">{s.button}<Icon name="external" /></a>
+          )}
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+<div class="form-wrap" id={id}>
+  <form
+    class="form"
+    name={formName}
+    method="POST"
+    action={url(lang, "thanks")}
+    enctype="multipart/form-data"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    novalidate
+    data-msg-required={f.required}
+    data-msg-email={f.invalidEmail}
+    data-msg-choose={f.chooseOne}
+    data-msg-course={f.chooseCourse}
+    data-msg-consent={f.consentRequired}
+    data-msg-size={f.fileTooBig}
+    data-msg-type={f.fileType}
+    data-msg-sending={f.sending}
+  >
+    <input type="hidden" name="form-name" value={formName} />
+    <input type="hidden" name="language" value={lang} />
+    <input type="hidden" name="page" value={Astro.url.pathname.replace(/\.html$/, "")} />
+    <p class="hp" aria-hidden="true"><label>Leave empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+    {/* ---------- Partner inquiry ---------- */}
+    {
+      kind === "partner" && (
+        <>
+        <fieldset class="field" data-group="interest">
+          <legend>{f.interest} <span class="req" aria-hidden="true">*</span></legend>
+          <div class="choices">
+            {Object.entries(f.interestOptions).map(([k, label]) => (
+              <label><input type="checkbox" name={`interest-${k}`} value={label} /> {label}</label>
+            ))}
+          </div>
+          <p class="error" aria-live="polite"></p>
+        </fieldset>
+        <div class="form-row">
+          <div class="field">
+            <label for={fid("company")}>{f.company} <span class="req" aria-hidden="true">*</span></label>
+            <input id={fid("company")} type="text" name="company" required autocomplete="organization" />
+            <p class="error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for={fid("name")}>{f.name} <span class="req" aria-hidden="true">*</span></label>
+            <input id={fid("name")} type="text" name="name" required autocomplete="name" />
+            <p class="error" aria-live="polite"></p>
+          </div>
+        </div>
+        </>
+      )
+    }
+
+    {
+      kind !== "partner" && (
+        <div class="field">
+          <label for={fid("name")}>{f.name} <span class="req" aria-hidden="true">*</span></label>
+          <input id={fid("name")} type="text" name="name" required autocomplete="name" />
+          <p class="error" aria-live="polite"></p>
+        </div>
+      )
+    }
+
+    <div class="form-row">
+      <div class="field">
+        <label for={fid("email")}>{f.email} <span class="req" aria-hidden="true">*</span></label>
+        <input id={fid("email")} type="email" name="email" required autocomplete="email" inputmode="email" />
+        <p class="error" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for={fid("phone")}>{f.phone} <span class="req" aria-hidden="true">*</span></label>
+        <input id={fid("phone")} type="tel" name="phone" required autocomplete="tel" inputmode="tel" />
+        <p class="error" aria-live="polite"></p>
+      </div>
+    </div>
+
+    {
+      (kind === "course" || kind === "contact") && (
+        <fieldset class="field" data-group="course">
+          <legend>{f.course} <span class="req" aria-hidden="true">*</span></legend>
+          <div class="choices">
+            {courseKeys.map((k) => (
+              <label><input type="radio" name="course" value={f.courseOptions[k]} checked={k === course} required /> {f.courseOptions[k]}</label>
+            ))}
+          </div>
+          <p class="error" aria-live="polite"></p>
+        </fieldset>
+      )
+    }
+
+    {
+      kind === "partner" && (
+        <div class="form-row">
+          <div class="field">
+            <label for={fid("participants")}>{f.participants} <span class="opt">({f.optional})</span></label>
+            <input id={fid("participants")} type="number" name="participants" min="1" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label for={fid("date")}>{f.date} <span class="opt">({f.optional})</span></label>
+            <input id={fid("date")} type="date" name="preferred-date" />
+          </div>
+        </div>
+      )
+    }
+
+    {
+      (kind === "contact" || kind === "partner") && (
+        <div class="field">
+          <label for={fid("message")}>{kind === "partner" ? f.project : f.message} <span class="opt">({f.optional})</span></label>
+          <textarea id={fid("message")} name="message" rows="5"></textarea>
+        </div>
+      )
+    }
+
+    {
+      kind !== "partner" && (
+        <div class="field" data-file>
+          <label for={fid("file")}>
+            {kind === "mfa" ? f.europass : kind === "contact" ? f.attachment : f.cv}{" "}
+            {kind === "mfa" ? <span class="req" aria-hidden="true">*</span> : <span class="opt">({f.optional})</span>}
+          </label>
+          <input id={fid("file")} class="file-input" type="file" name={kind === "contact" ? "attachment" : "cv"} accept={accept} required={kind === "mfa"} aria-describedby={fid("file-hint")} />
+          <p class="hint" id={fid("file-hint")}>{f.fileHint}</p>
+          <p class="error" aria-live="polite"></p>
+        </div>
+      )
+    }
+
+    <div class="field" data-consent>
+      <label class="consent">
+        <input type="checkbox" name="privacy-consent" value="yes" required />
+        <span>{f.consent} <a href={url(lang, "privacy")} target="_blank">{f.consentLink}</a>. <span class="req" aria-hidden="true">*</span></span>
+      </label>
+      <p class="error" aria-live="polite"></p>
+    </div>
+
+    <div class="form-status err" role="alert" hidden>
+      {f.error} <a href={`mailto:${site.email}`}>{site.email}</a>.
+    </div>
+
+    <div><button class="btn btn-navy" type="submit">{f.submit}</button></div>
+  </form>
+
+  <div class="form-success" hidden tabindex="-1">
+    <Icon name="checkCircle" />
+    <h3>{f.successTitle}</h3>
+    <p>{f.success}</p>
+  </div>
+</div>
+
+<script>
+  const MAX_BYTES = 5 * 1024 * 1024;
+  const OK_TYPES = /\.(pdf|docx?|odt|jpe?g|png)$/i;
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  document.querySelectorAll<HTMLFormElement>("form[data-netlify]").forEach((form) => {
+    if (form.dataset.ready) return;
+    form.dataset.ready = "1";
+    const msg = form.dataset;
+
+    const setError = (field: Element, text: string) => {
+      field.classList.toggle("invalid", !!text);
+      const el = field.querySelector(".error");
+      if (el) el.textContent = text;
+      field.querySelectorAll("input, textarea").forEach((i) => text ? i.setAttribute("aria-invalid", "true") : i.removeAttribute("aria-invalid"));
+    };
+
+    const validate = (field: Element): string => {
+      if (field.matches("[data-group=interest]")) return field.querySelector("input:checked") ? "" : msg.msgChoose!;
+      if (field.matches("[data-group=course]")) return field.querySelector("input:checked") ? "" : msg.msgCourse!;
+      if (field.matches("[data-consent]")) return field.querySelector<HTMLInputElement>("input")!.checked ? "" : msg.msgConsent!;
+      if (field.matches("[data-file]")) {
+        const input = field.querySelector<HTMLInputElement>("input[type=file]")!;
+        const file = input.files?.[0];
+        if (!file) return input.required ? msg.msgRequired! : "";
+        if (file.size > MAX_BYTES) return msg.msgSize!;
+        if (!OK_TYPES.test(file.name)) return msg.msgType!;
+        return "";
+      }
+      const input = field.querySelector<HTMLInputElement | HTMLTextAreaElement>("input, textarea");
+      if (!input) return "";
+      const v = input.value.trim();
+      if (input.required && !v) return msg.msgRequired!;
+      if (input.type === "email" && v && !EMAIL.test(v)) return msg.msgEmail!;
+      return "";
+    };
+
+    // Clear an error as soon as the visitor fixes it
+    form.addEventListener("input", (e) => {
+      const field = (e.target as Element).closest(".field");
+      if (field?.classList.contains("invalid")) setError(field, validate(field));
+    });
+    form.addEventListener("change", (e) => {
+      const field = (e.target as Element).closest(".field");
+      if (field && (field.classList.contains("invalid") || field.matches("[data-file]"))) setError(field, validate(field));
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      let first: Element | null = null;
+      form.querySelectorAll(".field").forEach((field) => {
+        const err = validate(field);
+        setError(field, err);
+        if (err && !first) first = field;
+      });
+      if (first) {
+        (first as Element).querySelector<HTMLElement>("input, textarea")?.focus();
+        return;
+      }
+
+      const status = form.querySelector<HTMLElement>(".form-status")!;
+      const button = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+      const label = button.textContent;
+      status.hidden = true;
+      button.disabled = true;
+      button.textContent = msg.msgSending!;
+
+      try {
+        const res = await fetch("/", { method: "POST", body: new FormData(form) });
+        if (!res.ok) throw new Error(String(res.status));
+        form.hidden = true;
+        const done = form.parentElement!.querySelector<HTMLElement>(".form-success")!;
+        done.hidden = false;
+        done.focus();
+      } catch {
+        status.hidden = false;
+        button.disabled = false;
+        button.textContent = label;
+      }
+    });
+  });
+</script>

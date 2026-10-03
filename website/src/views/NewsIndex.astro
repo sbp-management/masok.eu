@@ -1,0 +1,51 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import NewsCard from "../components/NewsCard.astro";
+import { t, type Lang } from "../i18n";
+import { getNews } from "../lib/news";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const N = d.newsPage;
+const news = await getNews(lang);
+const categories = [...new Set(news.map((a) => a.data.category))];
+---
+
+<Base lang={lang} page="news" title={d.meta.news.title} description={d.meta.news.description}>
+  <PageHead lang={lang} title={N.title} crumbs={[[N.title]]} />
+  <section class="section bg-soft">
+    <div class="container">
+      <h2 class="section-title">{N.heading}</h2>
+      {
+        categories.length > 1 && (
+          <div class="chips" role="group" aria-label={N.filterLabel}>
+            <button class="chip" type="button" data-cat="" aria-pressed="true">{N.all}</button>
+            {categories.map((c) => <button class="chip" type="button" data-cat={c} aria-pressed="false">{c}</button>)}
+          </div>
+        )
+      }
+      {
+        news.length ? (
+          <div class="grid grid-3 news-grid">{news.map((a) => <NewsCard article={a} />)}</div>
+        ) : (
+          <p class="center">{N.empty}</p>
+        )
+      }
+    </div>
+  </section>
+</Base>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>(".chip");
+  chips.forEach((chip) =>
+    chip.addEventListener("click", () => {
+      const cat = chip.dataset.cat;
+      chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+      document.querySelectorAll<HTMLElement>(".news-grid .news-card").forEach((card) => {
+        card.hidden = !!cat && card.dataset.cat !== cat;
+      });
+    }),
+  );
+</script>

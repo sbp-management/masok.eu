@@ -1,0 +1,26 @@
+---
+import Icon from "./Icon.astro";
+import { t, url, type Lang } from "../i18n";
+import { courseKeys } from "../i18n/routes";
+
+interface Props { lang: Lang; headingLevel?: "h2" | "h3" }
+const { lang, headingLevel = "h3" } = Astro.props;
+const d = t(lang);
+const H = headingLevel;
+---
+
+<div class="grid grid-4">
+  {
+    courseKeys.map((key) => {
+      const c = d.courseCards[key];
+      return (
+        <article class="card course-card">
+          <div class="icon-box icon-navy"><Icon name={c.icon} /></div>
+          <H>{c.title}</H>
+          <p>{c.text}</p>
+          <a class="btn btn-navy btn-sm" href={url(lang, key)} aria-label={`${d.ui.viewCourse}: ${c.title}`}>{d.ui.viewCourse}</a>
+        </article>
+      );
+    })
+  }
+</div>

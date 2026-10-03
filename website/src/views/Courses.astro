@@ -1,0 +1,20 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import CourseCards from "../components/CourseCards.astro";
+import { t, type Lang } from "../i18n";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+---
+
+<Base lang={lang} page="courses" title={d.meta.courses.title} description={d.meta.courses.description}>
+  <PageHead lang={lang} title={d.coursesPage.title} crumbs={[[d.coursesPage.title]]} />
+  <section class="section bg-soft">
+    <div class="container">
+      <h2 class="section-title">{d.coursesPage.heading}</h2>
+      <CourseCards lang={lang} />
+    </div>
+  </section>
+</Base>

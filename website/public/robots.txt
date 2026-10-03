@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /sr/hvala
+Disallow: /en/thank-you
+
+Sitemap: https://masok.eu/sitemap-index.xml

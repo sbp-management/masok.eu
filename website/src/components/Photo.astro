@@ -1,0 +1,43 @@
+---
+/**
+ * Responsive, optimized photo (AVIF/WebP in several sizes).
+ * If the image file is missing it shows a neutral placeholder instead of breaking the build.
+ */
+import { Picture } from "astro:assets";
+import { findImage, images } from "../data/images";
+
+interface Props {
+  name: string;
+  alt: string;
+  class?: string;
+  sizes?: string;
+  widths?: number[];
+  loading?: "lazy" | "eager";
+  priority?: boolean;
+}
+
+const { name, alt, class: className, sizes = "(max-width: 768px) 100vw, 50vw", widths = [400, 700, 1000, 1400], priority = false } = Astro.props;
+const loading = Astro.props.loading ?? (priority ? "eager" : "lazy");
+const meta = findImage(name);
+const usable = meta ? widths.filter((w) => w <= meta.width) : [];
+if (meta && !usable.includes(meta.width) && meta.width < Math.max(...widths)) usable.push(meta.width);
+const fileName = images[name as keyof typeof images]?.file ?? name;
+---
+
+{
+  meta ? (
+    <Picture
+      src={meta}
+      alt={alt}
+      widths={usable}
+      sizes={sizes}
+      formats={["avif", "webp"]}
+      class={className}
+      loading={loading}
+      decoding={priority ? "sync" : "async"}
+      fetchpriority={priority ? "high" : "auto"}
+    />
+  ) : (
+    <div class:list={["img-missing", className]} role="img" aria-label={alt} data-missing={fileName} />
+  )
+}

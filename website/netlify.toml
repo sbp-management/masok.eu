@@ -1,0 +1,60 @@
+# Netlify configuration for masok.eu
+# Docs: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# ---------- Redirects (old One.com addresses → new pages) ----------
+[[redirects]]
+  from = "/sr"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/sr/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/en"
+  to = "/en/"
+  status = 301
+
+# Near-empty page that existed in the old sitemap
+[[redirects]]
+  from = "/sr/partneri"
+  to = "/"
+  status = 301
+
+# Old One.com file paths (e.g. the Europass CV template)
+[[redirects]]
+  from = "/onewebmedia/Europass_CV.docx"
+  to = "/documents/Europass_CV.docx"
+  status = 301
+
+# ---------- Security headers ----------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+
+# ---------- Caching ----------
+# Built assets have content hashes in their names, so they can be cached forever.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/documents/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

@@ -1,0 +1,37 @@
+---
+import { t, url, type Lang } from "../i18n";
+import { site } from "../data/site";
+
+interface Props {
+  lang: Lang;
+  title: string;
+  subtitle?: string;
+  /** Trail after "Home": [label, href] — the last item is the current page (no href). */
+  crumbs: [string, string?][];
+}
+const { lang, title, subtitle, crumbs } = Astro.props;
+const d = t(lang);
+const trail: [string, string?][] = [[d.ui.home, url(lang, "home")], ...crumbs];
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: trail.map(([name, href], i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name,
+    item: new URL(href ?? Astro.url.pathname.replace(/\.html$/, ""), site.url).href,
+  })),
+};
+---
+
+<section class="page-head">
+  <h1>{title}</h1>
+  {subtitle && <p class="subtitle">{subtitle}</p>}
+  <nav class="breadcrumb" aria-label={d.ui.breadcrumb}>
+    <ol>
+      {trail.map(([label, href]) => (href ? <li><a href={href}>{label}</a></li> : <li><span aria-current="page">{label}</span></li>))}
+    </ol>
+  </nav>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+</section>

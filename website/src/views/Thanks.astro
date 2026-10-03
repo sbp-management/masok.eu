@@ -1,0 +1,21 @@
+---
+/** Shown after a form is sent without JavaScript (the normal flow shows the message in place). */
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { t, url, type Lang } from "../i18n";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+---
+
+<Base lang={lang} page="thanks" title={d.meta.thanks.title} description={d.meta.thanks.description} noindex>
+  <section class="section">
+    <div class="container narrow center form-success">
+      <Icon name="checkCircle" />
+      <h1 style="color:var(--navy)">{d.thanks.title}</h1>
+      <p>{d.thanks.text}</p>
+      <a class="btn btn-navy" href={url(lang, "home")}>{d.thanks.back}</a>
+    </div>
+  </section>
+</Base>

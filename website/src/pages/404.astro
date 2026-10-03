@@ -1,0 +1,24 @@
+---
+// Netlify shows this page for any address that doesn't exist. Bilingual, since we can't know the visitor's language.
+import Base from "../layouts/Base.astro";
+import { t, url } from "../i18n";
+const sr = t("sr");
+const en = t("en");
+---
+
+<Base lang="sr" title={`${sr.notFound.title} / ${en.notFound.title} | MASOK`} description={en.notFound.text} noindex>
+  <section class="page-head">
+    <h1>404</h1>
+  </section>
+  <section class="section">
+    <div class="container narrow center">
+      <h2 style="color:var(--navy)">{sr.notFound.title}</h2>
+      <p>{sr.notFound.text}</p>
+      <p><a class="btn btn-navy" href={url("sr", "home")}>{sr.notFound.back}</a></p>
+      <hr style="margin:40px auto;max-width:200px;border:0;border-top:1px solid var(--border)" />
+      <h2 style="color:var(--navy)" lang="en">{en.notFound.title}</h2>
+      <p lang="en">{en.notFound.text}</p>
+      <p><a class="btn btn-navy" href={url("en", "home")} lang="en">{en.notFound.back}</a></p>
+    </div>
+  </section>
+</Base>

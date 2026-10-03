@@ -1,0 +1,49 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import Photo from "../components/Photo.astro";
+import { t, url, fill, type Lang } from "../i18n";
+import { site, team } from "../data/site";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const A = d.about;
+---
+
+<Base lang={lang} page="about" title={d.meta.about.title} description={d.meta.about.description}>
+  <PageHead lang={lang} title={A.title} crumbs={[[A.title]]} />
+
+  <section class="section">
+    <div class="container about-grid">
+      <div>
+        <h2>{A.whoTitle}</h2>
+        {A.paragraphs.map((p) => <p>{fill(p, lang)}</p>)}
+        <a class="btn btn-navy" href={url(lang, "contact")}>{A.contactButton}</a>
+      </div>
+      <aside class="card">
+        <h2 style="font-size:1.3rem;color:var(--navy)">{A.founderTitle}</h2>
+        <p>{A.founderText}</p>
+        <p>{A.moreInfo} <a href={site.sbpManagement} target="_blank" rel="noopener">www.sbp-management.com</a></p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="team-band">
+    <div class="container">
+      <h2 class="section-title">{A.teamTitle}</h2>
+      <div class="team-grid">
+        {team.map((m) => (
+          <article class="card person-card">
+            <Photo name={m.photo} alt={m.name} class="media ratio-3-4" sizes="(max-width: 900px) 340px, 300px" widths={[300, 500, 700]} />
+            <div class="caption">
+              <h3>{m.name}</h3>
+              <p>{m.role[lang]}</p>
+            </div>
+            {m.bio[lang] && <p class="bio">{m.bio[lang]}</p>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

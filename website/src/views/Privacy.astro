@@ -1,0 +1,91 @@
+---
+/**
+ * Privacy policy (SR + EN).
+ * TODO(confirm): DRAFT – have this text reviewed by a lawyer before launch, and fill in
+ * the retention periods below and the legal details in src/data/site.ts.
+ */
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import { t, formatDate, type Lang } from "../i18n";
+import { site } from "../data/site";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const L = site.legal;
+const a = site.address;
+const updated = formatDate(new Date("2026-10-03"), lang);
+const ids = [L.registrationNumber && (lang === "sr" ? `MB: ${L.registrationNumber}` : `Reg. no.: ${L.registrationNumber}`), L.taxId && `PIB: ${L.taxId}`].filter(Boolean).join(", ");
+---
+
+<Base lang={lang} page="privacy" title={d.meta.privacy.title} description={d.meta.privacy.description}>
+  <PageHead lang={lang} title={lang === "sr" ? "Politika privatnosti" : "Privacy policy"} crumbs={[[lang === "sr" ? "Politika privatnosti" : "Privacy policy"]]} />
+  <section class="section">
+    <div class="container narrow prose">
+      {
+        lang === "sr" ? (
+          <>
+            <p><em>Poslednja izmena: {updated}</em></p>
+            <h2>1. Ko je rukovalac podacima</h2>
+            <p>{L.entity}, {a.street}, {a.postalCode} {a.city}, Srbija{ids && `, ${ids}`}. Za sva pitanja o podacima o ličnosti pišite nam na <a href={`mailto:${L.privacyEmail}`}>{L.privacyEmail}</a>.</p>
+
+            <h2>2. Koje podatke prikupljamo</h2>
+            <p>Kada popunite formular na ovom sajtu, prikupljamo podatke koje unesete: ime i prezime, email, broj telefona, izabrani program, poruku, a kod prijava i biografiju (CV) ili drugi priloženi dokument. Kod upita kompanija prikupljamo i naziv kompanije, broj učesnika i željeni datum.</p>
+            <p>Pri svakoj poseti, naš hosting provajder automatski beleži tehničke podatke (IP adresa, tip pregledača, vreme pristupa) radi bezbednosti i ispravnog rada sajta.</p>
+
+            <h2>3. Zašto obrađujemo podatke i na kom osnovu</h2>
+            <ul>
+              <li>Obrada prijava za programe i odgovaranje na upite – na osnovu vašeg pristanka i radi preduzimanja radnji pre zaključenja ugovora na vaš zahtev (čl. 12. Zakona o zaštiti podataka o ličnosti, čl. 6. st. 1. tač. a) i b) GDPR-a).</li>
+              <li>Bezbednost i rad sajta – na osnovu našeg legitimnog interesa.</li>
+            </ul>
+            <p>Podatke ne prodajemo i ne koristimo ih za oglašavanje.</p>
+
+            <h2>4. Ko ima pristup podacima</h2>
+            <p>Sajt i poslati formulari čuvaju se kod kompanije Netlify, Inc. (SAD), koja za nas obavlja hosting i obradu formulara. Prenos podataka u SAD obavlja se uz odgovarajuće mere zaštite (npr. standardne ugovorne klauzule EU). Pristup prijavama ima samo ovlašćeno osoblje Akademije MASOK.</p>
+
+            <h2>5. Koliko dugo čuvamo podatke</h2>
+            {/* TODO(confirm): retention periods */}
+            <p>Prijave kandidata koji nisu upisani čuvamo najduže 12 meseci od završetka upisnog roka, a upite najduže 24 meseca, osim ako zakon ne nalaže duže čuvanje. Nakon toga podatke brišemo.</p>
+
+            <h2>6. Kolačići</h2>
+            <p>Ovaj sajt ne koristi kolačiće niti alate za praćenje i analitiku. Fontovi se učitavaju sa našeg servera. Ako kliknete na spoljne linkove (Google Maps, Google Forms, Facebook, LinkedIn), primenjuju se pravila privatnosti tih servisa.</p>
+
+            <h2>7. Vaša prava</h2>
+            <p>Imate pravo na pristup, ispravku i brisanje svojih podataka, ograničenje obrade, prenosivost podataka i prigovor na obradu, kao i pravo da u svakom trenutku opozovete pristanak, bez uticaja na zakonitost ranije obrade. Zahtev pošaljite na <a href={`mailto:${L.privacyEmail}`}>{L.privacyEmail}</a>.</p>
+            <p>Ako smatrate da je obrada nezakonita, možete podneti pritužbu Povereniku za informacije od javnog značaja i zaštitu podataka o ličnosti (<a href="https://www.poverenik.rs" target="_blank" rel="noopener">www.poverenik.rs</a>).</p>
+          </>
+        ) : (
+          <>
+            <p><em>Last updated: {updated}</em></p>
+            <h2>1. Who is responsible for your data</h2>
+            <p>{L.entity}, {a.street}, {a.postalCode} {a.city}, Serbia{ids && `, ${ids}`}. For any questions about your personal data, email us at <a href={`mailto:${L.privacyEmail}`}>{L.privacyEmail}</a>.</p>
+
+            <h2>2. What data we collect</h2>
+            <p>When you fill in a form on this website, we collect the information you enter: your name, email address, phone number, chosen course, message and, for applications, your CV or other attached document. For company inquiries we also collect the company name, number of participants and preferred date.</p>
+            <p>On every visit, our hosting provider automatically logs technical data (IP address, browser type, time of access) to keep the website secure and working.</p>
+
+            <h2>3. Why we process your data and on what legal basis</h2>
+            <ul>
+              <li>Handling course applications and answering inquiries – based on your consent and on steps taken at your request before entering into a contract (Art. 12 of the Serbian Law on Personal Data Protection; Art. 6(1)(a) and (b) GDPR).</li>
+              <li>Website security and operation – based on our legitimate interest.</li>
+            </ul>
+            <p>We never sell your data or use it for advertising.</p>
+
+            <h2>4. Who has access to your data</h2>
+            <p>The website and form submissions are stored by Netlify, Inc. (USA), which provides hosting and form processing for us. Transfers to the USA are protected by appropriate safeguards (such as the EU Standard Contractual Clauses). Only authorized MASOK Academy staff can access applications.</p>
+
+            <h2>5. How long we keep your data</h2>
+            <p>Applications from candidates who do not enroll are kept for up to 12 months after the enrollment period ends, and inquiries for up to 24 months, unless the law requires longer. After that, the data is deleted.</p>
+
+            <h2>6. Cookies</h2>
+            <p>This website does not use cookies or any tracking or analytics tools. Fonts are served from our own server. If you click external links (Google Maps, Google Forms, Facebook, LinkedIn), those services' privacy policies apply.</p>
+
+            <h2>7. Your rights</h2>
+            <p>You have the right to access, correct and delete your data, to restrict processing, to data portability and to object to processing, and you can withdraw your consent at any time without affecting the lawfulness of earlier processing. Send your request to <a href={`mailto:${L.privacyEmail}`}>{L.privacyEmail}</a>.</p>
+            <p>If you believe your data is processed unlawfully, you can lodge a complaint with the Serbian Commissioner for Information of Public Importance and Personal Data Protection (<a href="https://www.poverenik.rs" target="_blank" rel="noopener">www.poverenik.rs</a>).</p>
+          </>
+        )
+      }
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,50 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import Photo from "../components/Photo.astro";
+import Icon from "../components/Icon.astro";
+import Form from "../components/Form.astro";
+import { t, type Lang } from "../i18n";
+import { site, contactPeople } from "../data/site";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const K = d.contact;
+const a = site.address;
+const maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${a.name}, ${a.street}, ${a.postalCode} ${a.city}, ${a.country}`);
+const tel = (n: string) => "tel:" + n.replace(/[^\d+]/g, "");
+---
+
+<Base lang={lang} page="contact" title={d.meta.contact.title} description={d.meta.contact.description}>
+  <PageHead lang={lang} title={K.title} crumbs={[[K.title]]} />
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div>
+        <h2 class="contact-head">{K.heading}</h2>
+        <div class="people">
+          {contactPeople.map((p) => (
+            <div class="person">
+              <Photo name={p.photo} alt={p.name} class="media ratio-3-4" sizes="(max-width: 480px) 100vw, 260px" widths={[300, 500]} />
+              <h3>{p.name}</h3>
+              <p>{p.role[lang]}</p>
+              <p><a href={`mailto:${p.email}`}>{p.email}</a></p>
+              <p><a href={tel(p.phone)}>{p.phone}</a></p>
+            </div>
+          ))}
+        </div>
+        <h3>{K.addressTitle}</h3>
+        <ul class="contact-lines">
+          <li><Icon name="pin" /><a href={maps} target="_blank" rel="noopener">{a.name}<br />{a.street}<br />{a.postalCode} {a.city}<br />{a.country}</a></li>
+          <li><Icon name="phone" /><a href={tel(site.phone)}>{site.phone}</a></li>
+          <li><Icon name="mail" /><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        </ul>
+      </div>
+      <div class="form-card">
+        <h2 style="font-size:1.4rem;color:var(--navy)">{K.formTitle}</h2>
+        <Form lang={lang} kind="contact" />
+      </div>
+    </div>
+  </section>
+</Base>

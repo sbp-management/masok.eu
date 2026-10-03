@@ -1,0 +1,95 @@
+---
+import Base from "../layouts/Base.astro";
+import Photo from "../components/Photo.astro";
+import Icon from "../components/Icon.astro";
+import CourseCards from "../components/CourseCards.astro";
+import NewsCard from "../components/NewsCard.astro";
+import { t, url, fill, type Lang, type PageKey } from "../i18n";
+import { getNews } from "../lib/news";
+import { site } from "../data/site";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const H = d.home;
+const news = (await getNews(lang)).slice(0, 3);
+
+const orgLd = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  name: "MASOK Academy",
+  alternateName: "Akademija MASOK",
+  url: site.url,
+  logo: `${site.url}/favicon.png`,
+  email: site.email,
+  telephone: site.phone.replace(/\s/g, ""),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    postalCode: site.address.postalCode,
+    addressLocality: site.address.city,
+    addressCountry: site.address.countryCode,
+  },
+  sameAs: [site.social.facebook, site.social.linkedin],
+  parentOrganization: { "@type": "Organization", name: "SBP Management", url: site.sbpManagement },
+};
+const websiteLd = { "@context": "https://schema.org", "@type": "WebSite", name: d.siteName, url: site.url, inLanguage: ["sr", "en"] };
+---
+
+<Base lang={lang} page="home" title={d.meta.home.title} description={d.meta.home.description} jsonLd={[orgLd, websiteLd]}>
+  <section class="hero">
+    <Photo name="hero-instruments" alt="" class="hero-bg" sizes="100vw" widths={[640, 1024, 1600, 2200]} priority />
+    <div class="container">
+      <h1>{H.title}</h1>
+      <p class="hero-sub">{H.subtitle}</p>
+      {H.lines.map((l) => <p class="hero-line">{l}</p>)}
+      <div class="btn-row">
+        <a class="btn btn-white" href={url(lang, H.primaryButton.page as PageKey)}>{H.primaryButton.label}</a>
+        <a class="btn btn-navy" href={url(lang, H.secondaryButton.page as PageKey)}>{H.secondaryButton.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-soft">
+    <div class="container">
+      <h2 class="section-title">{H.whyTitle}</h2>
+      <ul class="grid grid-6" role="list" style="list-style:none;padding:0;margin:0">
+        {H.why.map((w) => (
+          <li class="card why-card">
+            <div class="icon-box icon-yellow"><Icon name={w.icon} /></div>
+            <p>{w.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">{H.coursesTitle}</h2>
+      <CourseCards lang={lang} />
+    </div>
+  </section>
+
+  <section class="section bg-yellow highlight">
+    <div class="container">
+      <h2>{H.highlightTitle}</h2>
+      <p>{fill(H.highlightText, lang)}</p>
+      <a class="btn btn-navy" href={url(lang, "applicants")}>{H.highlightButton}</a>
+    </div>
+  </section>
+
+  {
+    news.length > 0 && (
+      <section class="section bg-soft">
+        <div class="container">
+          <h2 class="section-title">{H.newsTitle}</h2>
+          <div class="grid grid-3">
+            {news.map((a) => <NewsCard article={a} />)}
+          </div>
+          <p class="center" style="margin-top:32px"><a class="btn btn-navy" href={url(lang, "news")}>{H.allNews}</a></p>
+        </div>
+      </section>
+    )
+  }
+</Base>
