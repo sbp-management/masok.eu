@@ -10,8 +10,6 @@ export const site = {
   url: "https://masok.eu",
 
   // Main contact shown in the footer and in structured data for Google.
-  // TODO(confirm): main public phone number. The old site showed +381 60 6868225
-  // (the Director's number) next to Nikola's email.
   phone: "+381 60 6868225",
   email: "n.banda@masok.eu",
 
@@ -32,17 +30,17 @@ export const site = {
   // Business hours. While this is `null`, the footer hides the hours block
   // (better than showing "Sunday – Saturday: Closed" like the old site).
   // Example: [{ days: { sr: "Ponedeljak – Petak", en: "Monday – Friday" }, hours: "09:00 – 17:00" }]
-  // TODO(confirm): real business hours
-  hours: null as null | { days: { sr: string; en: string }; hours: string }[],
+  hours: [
+    { days: { sr: "Ponedeljak – Petak", en: "Monday – Friday" }, hours: "08:00 – 16:00" },
+  ] as null | { days: { sr: string; en: string }; hours: string }[],
 
   // When the first generation starts. Used on the homepage, About page and course pages.
   // The old site said September in some places and October in others.
   // Serbian is used after "u" ("počinje u ..."), so write it in the locative: "septembru 2026." / "oktobru 2026."
-  // TODO(confirm): start month of the first generation
   intake: { sr: "oktobru 2026.", en: "October 2026" },
 
   // Legal details for the privacy policy.
-  // TODO(confirm): registered legal name, registration number (MB) and tax ID (PIB)
+  // TODO(confirm): registration number (MB) and tax ID (PIB)
   legal: {
     entity: "Akademija MASOK",
     registrationNumber: "",

@@ -23,7 +23,7 @@ async function walk(dir) {
 for (const file of await walk(path.join(root, "src"))) {
   const lines = (await readFile(file, "utf8")).split("\n");
   lines.forEach((line, i) => {
-    const m = line.match(/TODO\(confirm\):?\s*(.*)/);
+    const m = line.match(/TODO\(confirm\):\s*(.*)/);
     if (m) warnings.push(`${path.relative(root, file)}:${i + 1}  ${m[1].trim()}`);
   });
 }

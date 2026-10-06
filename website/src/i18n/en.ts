@@ -200,7 +200,6 @@ const en = {
             ["Requirements", "Secondary school or college diploma in a medical field"],
             ["Qualification standard", "Based on the EU MFA model (Germany, Austria, Switzerland)"],
             ["Language training", "Intensive German as part of the course"],
-            // TODO(confirm): the old English page also promised a "nationally recognized qualification"; the Serbian page did not.
             ["Certificate", "Internationally recognized AHK certificate"],
             ["Career prospects", "Healthcare institutions"],
           ],
