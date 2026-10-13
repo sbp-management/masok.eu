@@ -1,0 +1,252 @@
+/*
+ * Motion, adapted from the SBP Management redesign (sbp-management.com, src/app/[locale]/site.css).
+ * Everything here is decorative.
+ *
+ * - Load effects (hero words, hero slideshow, ticker, drifting squares) run from CSS alone.
+ * - Scroll effects only apply while <html> has the `motion` class. Base.astro adds it in <head>
+ *   (only when the visitor has not asked for reduced motion) and src/scripts/motion.ts sets
+ *   `data-in` on each element as it scrolls into view. Once an element has left the screen
+ *   completely, data-in is removed again, so the effect replays next time.
+ *   If the script never runs, Base.astro removes `motion` after 3 s so nothing stays hidden.
+ * - The element lists below must match the selectors in src/scripts/motion.ts.
+ */
+
+:root {
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-inout: cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+/* ---------- Scroll reveal: fade + rise ---------- */
+.motion :is(.section-title, .section:not(.highlight) h2:not(.section-title), .faq, .form-wrap, aside.card, .contact-head) {
+  transition: opacity 0.8s var(--ease-out), translate 0.8s var(--ease-out);
+}
+.motion :is(.section-title, .section:not(.highlight) h2:not(.section-title), .faq, .form-wrap, aside.card, .contact-head):not([data-in]) {
+  opacity: 0;
+  translate: 0 28px;
+}
+
+/* ---------- Lists and grids: children cascade in one after another (--i set by motion.ts) ---------- */
+.motion :is(.grid, .team-grid, .steps-list, .check-list, .includes, .gallery, .contact-lines, .info-list) > * {
+  transition: opacity 0.6s var(--ease-out), translate 0.6s var(--ease-out);
+  transition-delay: calc(120ms + var(--i, 0) * 90ms);
+}
+.motion :is(.grid, .team-grid, .steps-list, .check-list, .includes, .gallery, .contact-lines, .info-list):not([data-in]) > * {
+  opacity: 0;
+  translate: 0 16px;
+}
+
+/* ---------- Partner services: photo wipes in from the left, then settles with a slow zoom ---------- */
+.service picture {
+  display: block;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.2s var(--ease-inout) 0.15s;
+}
+.service picture img {
+  scale: 1.12;
+  transition: scale 1.8s var(--ease-out);
+}
+.motion .service:not([data-in]) picture {
+  clip-path: inset(0 100% 0 0);
+}
+.motion .service:not([data-in]) picture img {
+  scale: 1.3;
+}
+.service.reverse picture {
+  /* Mirrored rows wipe in from the right. */
+  transition-delay: 0.15s;
+}
+.motion .service.reverse:not([data-in]) picture {
+  clip-path: inset(0 0 0 100%);
+}
+
+/* ---------- Yellow highlight band: heading, text and button slide in from the left ---------- */
+.highlight { position: relative; overflow: hidden; isolation: isolate; }
+.highlight .container > * {
+  transition: translate 0.7s var(--ease-out);
+}
+.highlight .container > :nth-child(2) { transition-delay: 0.12s; }
+.highlight .container > :nth-child(3) { transition-delay: 0.24s; }
+.motion .highlight:not([data-in]) .container > * {
+  translate: -40px 0;
+}
+
+/* Floating squares behind the highlight band. */
+.drift {
+  position: absolute;
+  z-index: -1;
+  width: var(--s, 40px);
+  aspect-ratio: 1;
+  background: var(--c, var(--navy));
+  opacity: var(--o, 0.12);
+  border-radius: 3px;
+  animation: drift 9s ease-in-out infinite alternate;
+  animation-delay: var(--d, 0ms);
+  pointer-events: none;
+}
+@keyframes drift {
+  to {
+    translate: var(--dx, 0) var(--dy, -24px);
+    rotate: var(--dr, 8deg);
+  }
+}
+
+/* ---------- Hero: words rise in one by one, then the rest follows ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 0.5em;
+    filter: blur(6px);
+  }
+}
+.hero-word {
+  display: inline-block;
+  animation: rise 0.9s var(--ease-out) both;
+  animation-delay: calc(120ms + var(--i) * 70ms);
+}
+.hero-in {
+  animation: rise 0.9s var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* ---------- Homepage hero slideshow (script in Home.astro) ----------
+ * The incoming photo slides in from the right, decelerating until it settles; the outgoing
+ * photo fades out at the same time. Sits under the dark overlay (.hero::before, z-index -1). */
+.hero-slide { z-index: -3; opacity: 0; }
+.hero-slide.is-first { opacity: 1; }
+.hero-slide.is-in { z-index: -2; animation: hero-slide-in 5s both; }
+.hero-slide.is-out { animation: hero-slide-out 5s ease-in-out both; }
+@keyframes hero-slide-in {
+  0% {
+    opacity: 0;
+    translate: 8% 0;
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.3, 1);
+  }
+  96%,
+  100% {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes hero-slide-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* ---------- Ticker band of course names ---------- */
+.ticker { overflow: hidden; background: var(--navy); border-block: 1px solid var(--navy-dark); padding: 18px 0; }
+.ticker-track { display: flex; width: max-content; animation: ticker 45s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker ul { display: flex; align-items: center; flex-shrink: 0; list-style: none; margin: 0; padding: 0; }
+.ticker li {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding-right: 32px;
+  color: var(--white);
+  font-size: clamp(1.15rem, 0.95rem + 0.9vw, 1.6rem);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.ticker li::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  rotate: 45deg;
+  background: var(--yellow);
+}
+@keyframes ticker {
+  to { translate: -50% 0; }
+}
+
+/* ---------- Card hover: a 2px gold → navy light makes one lap of the border, then fades ---------- */
+@property --glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+:is(.course-card, .news-card, .overview-card, .num-card, .package) {
+  position: relative;
+}
+:is(.course-card, .news-card, .overview-card, .num-card, .package)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  padding: 2px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--glow-angle),
+    transparent 0deg 200deg,
+    color-mix(in srgb, var(--yellow) 40%, transparent) 250deg,
+    var(--yellow) 300deg,
+    var(--yellow-light) 345deg,
+    var(--white) 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+}
+:is(.course-card, .news-card, .overview-card, .num-card, .package):is(:hover, :focus-within)::before {
+  animation: glow-lap 5s ease-in-out both;
+}
+@keyframes glow-lap {
+  0% { --glow-angle: 0deg; opacity: 0; }
+  12%, 82% { opacity: 1; }
+  100% { --glow-angle: 360deg; opacity: 0; }
+}
+
+/* ---------- Scroll-driven extras where the browser supports them ---------- */
+.scroll-progress { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    /* Gentle parallax on the partner-service photos. */
+    .service picture img {
+      animation: parallax linear both;
+      animation-timeline: view();
+    }
+    @keyframes parallax {
+      from { translate: 0 -5%; }
+      to { translate: 0 5%; }
+    }
+  }
+  @supports (animation-timeline: scroll()) {
+    /* Thin gold reading-progress bar along the top of the window. */
+    .scroll-progress {
+      display: block;
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 60;
+      height: 3px;
+      background: linear-gradient(90deg, var(--yellow), var(--yellow-light));
+      transform-origin: 0 50%;
+      animation: grow-progress linear both;
+      animation-timeline: scroll(root);
+    }
+    @keyframes grow-progress {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+  }
+}
+
+/* ---------- Reduced motion: everything still, nothing hidden ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-word,
+  .hero-in,
+  .hero-slide,
+  .ticker-track,
+  .drift {
+    animation: none !important;
+  }
+  .hero-slide:not(.is-first) { display: none; }
+  .service picture img { scale: none; }
+  /* No travelling light: show the border still while hovering. */
+  :is(.course-card, .news-card, .overview-card, .num-card, .package):is(:hover, :focus-within)::before {
+    animation: none !important;
+    opacity: 1;
+  }
+}

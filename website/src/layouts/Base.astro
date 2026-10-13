@@ -3,6 +3,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "../styles/global.css";
+import "../styles/motion.css";
 import { getImage } from "astro:assets";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -49,6 +50,14 @@ const favicon = "/favicon.png";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Scroll effects (src/styles/motion.css + src/scripts/motion.ts) hide content until it scrolls in.
+      // Only switch them on without "reduce motion", and show everything if the script hasn't run after 3 s.
+      if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("motion");
+        setTimeout(function () { if (!window.__motion) document.documentElement.classList.remove("motion"); }, 3000);
+      }
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -79,6 +88,7 @@ const favicon = "/favicon.png";
     {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
   </head>
   <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#main">{d.ui.skip}</a>
     <Header lang={lang} page={page} langLinks={langLinks} />
     <main id="main" tabindex="-1">
@@ -99,18 +109,9 @@ const favicon = "/favicon.png";
           document.querySelector<HTMLElement>(".skip-link")?.focus({ preventScroll: true });
         });
       }
-
-      // Gentle fade-in of cards while scrolling
-      if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        document.documentElement.classList.add("js-reveal");
-        const io = new IntersectionObserver(
-          (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }),
-          { rootMargin: "0px 0px -40px 0px" },
-        );
-        document.querySelectorAll(".card, .package, .service, .section-title").forEach((el) => {
-          if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add("reveal"); io.observe(el); }
-        });
-      }
+    </script>
+    <script>
+      import "../scripts/motion";
     </script>
   </body>
 </html>

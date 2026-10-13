@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import Photo from "../components/Photo.astro";
 import Icon from "../components/Icon.astro";
 import Form from "../components/Form.astro";
+import Words from "../components/Words.astro";
 import { t, type Lang } from "../i18n";
 
 interface Props { lang: Lang }
@@ -15,10 +16,10 @@ const P = d.partners;
   <section class="hero">
     <Photo name="partners-hero" alt="" class="hero-bg" sizes="100vw" widths={[640, 1024, 1600, 2200]} priority />
     <div class="container">
-      <h1>{P.title}</h1>
-      <p class="hero-sub">{P.subtitle}</p>
-      {P.lines.map((l) => <p class="hero-line">{l}</p>)}
-      <div class="btn-row">
+      <h1><Words text={P.title} /></h1>
+      <p class="hero-sub hero-in" style="--d:450ms">{P.subtitle}</p>
+      {P.lines.map((l, i) => <p class="hero-line hero-in" style={`--d:${600 + i * 120}ms`}>{l}</p>)}
+      <div class="btn-row hero-in" style="--d:900ms">
         <a class="btn btn-yellow" href="#inquiry">{P.buttons[0]}</a>
         <a class="btn btn-outline" href="#inquiry">{P.buttons[1]}</a>
       </div>

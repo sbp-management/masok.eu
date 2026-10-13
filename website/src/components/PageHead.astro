@@ -1,6 +1,7 @@
 ---
 import { t, url, type Lang } from "../i18n";
 import { site } from "../data/site";
+import Words from "./Words.astro";
 
 interface Props {
   lang: Lang;
@@ -26,9 +27,9 @@ const breadcrumbLd = {
 ---
 
 <section class="page-head">
-  <h1>{title}</h1>
-  {subtitle && <p class="subtitle">{subtitle}</p>}
-  <nav class="breadcrumb" aria-label={d.ui.breadcrumb}>
+  <h1><Words text={title} /></h1>
+  {subtitle && <p class="subtitle hero-in" style="--d:350ms">{subtitle}</p>}
+  <nav class="breadcrumb hero-in" style="--d:450ms" aria-label={d.ui.breadcrumb}>
     <ol>
       {trail.map(([label, href]) => (href ? <li><a href={href}>{label}</a></li> : <li><span aria-current="page">{label}</span></li>))}
     </ol>

@@ -302,6 +302,11 @@ button { font: inherit; cursor: pointer; }
 .news-track > .news-card { flex: 0 0 calc((100% - 48px) / 3.25); scroll-snap-align: start; }
 @media (max-width: 900px) { .news-track > .news-card { flex-basis: calc((100% - 24px) / 2.2); } }
 @media (max-width: 640px) { .news-track > .news-card { flex-basis: 82%; } }
+/* Keep every card in the strip the same compact shape: cap long titles and summaries */
+.news-track .news-card h3 a, .news-track .news-card .excerpt { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+.news-track .news-card h3 a { -webkit-line-clamp: 3; }
+.news-track .news-card .excerpt { -webkit-line-clamp: 4; flex: none; }
+.news-track .news-card .more { margin-top: auto; }
 @media (prefers-reduced-motion: reduce) { .news-track { scroll-behavior: auto; } }
 .scroll-btn {
   position: absolute; top: calc(50% - 32px); z-index: 2; width: 46px; height: 46px; border-radius: 50%;
@@ -383,12 +388,9 @@ button { font: inherit; cursor: pointer; }
 .to-top.show { opacity: 1; visibility: visible; }
 .to-top svg { width: 22px; height: 22px; }
 
-/* ---------- Reveal on scroll (only when JS adds .js-reveal) ---------- */
-.js-reveal .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
-.js-reveal .reveal.in { opacity: 1; transform: none; }
+/* ---------- Reduced motion (scroll effects: see motion.css) ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js-reveal .reveal { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
 

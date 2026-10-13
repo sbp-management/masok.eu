@@ -1,0 +1,10 @@
+---
+/**
+ * Splits a headline into words that rise in one after another on page load (.hero-word in motion.css).
+ * The text stays plain text for search engines and screen readers.
+ */
+interface Props { text: string }
+const words = Astro.props.text.split(/\s+/).filter(Boolean);
+---
+
+{words.map((w, i) => <><span class="hero-word" style={`--i:${i}`}>{w}</span>{i < words.length - 1 && " "}</>)}
