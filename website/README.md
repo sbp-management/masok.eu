@@ -77,7 +77,8 @@ The included articles have `sample: true` – edit or delete them before launch.
 
 ### Adding a new photo
 
-1. Put the file in `src/assets/images/` (JPG, PNG or WebP – any size, Astro compresses it).
+1. Put the file in `src/assets/images/` (JPG, PNG or WebP – Astro compresses it). Keep it at most
+   2400 px wide (the site never shows photos larger than 2200 px), e.g. `sips --resampleWidth 2400 photo.jpg`.
 2. Add a line to `src/data/images.ts`, e.g. `"open-day": { file: "open-day.jpg", source: "" },`
 3. Use the key (`"open-day"`) in a page or article.
 
