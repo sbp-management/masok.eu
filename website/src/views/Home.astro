@@ -12,7 +12,7 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const d = t(lang);
 const H = d.home;
-const news = (await getNews(lang)).slice(0, 3);
+const news = (await getNews(lang)).slice(0, 8);
 
 const orgLd = {
   "@context": "https://schema.org",
@@ -84,8 +84,12 @@ const websiteLd = { "@context": "https://schema.org", "@type": "WebSite", name: 
       <section class="section bg-soft">
         <div class="container">
           <h2 class="section-title">{H.newsTitle}</h2>
-          <div class="grid grid-3">
-            {news.map((a) => <NewsCard article={a} />)}
+          <div class="news-scroller">
+            <div class="news-track" role="region" aria-label={H.newsTitle} tabindex="0">
+              {news.map((a) => <NewsCard article={a} />)}
+            </div>
+            <button class="scroll-btn prev" type="button" aria-label={H.newsPrev} hidden><Icon name="chevron" /></button>
+            <button class="scroll-btn next" type="button" aria-label={H.newsNext} hidden><Icon name="chevron" /></button>
           </div>
           <p class="center" style="margin-top:32px"><a class="btn btn-navy" href={url(lang, "news")}>{H.allNews}</a></p>
         </div>
@@ -93,3 +97,30 @@ const websiteLd = { "@context": "https://schema.org", "@type": "WebSite", name: 
     )
   }
 </Base>
+
+<script>
+  // Latest news: prev/next buttons for the horizontal card strip
+  document.querySelectorAll<HTMLElement>(".news-scroller").forEach((box) => {
+    const track = box.querySelector<HTMLElement>(".news-track")!;
+    const prev = box.querySelector<HTMLButtonElement>(".scroll-btn.prev")!;
+    const next = box.querySelector<HTMLButtonElement>(".scroll-btn.next")!;
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      prev.hidden = next.hidden = max <= 1;
+      prev.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft >= max - 1;
+      box.classList.toggle("more-left", !prev.disabled && max > 1);
+      box.classList.toggle("more-right", !next.disabled && max > 1);
+    };
+    const step = (dir: number) => {
+      const card = track.firstElementChild as HTMLElement | null;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      track.scrollBy({ left: dir * ((card?.offsetWidth ?? track.clientWidth) + gap) });
+    };
+    prev.addEventListener("click", () => step(-1));
+    next.addEventListener("click", () => step(1));
+    track.addEventListener("scroll", update, { passive: true });
+    new ResizeObserver(update).observe(track);
+    update();
+  });
+</script>

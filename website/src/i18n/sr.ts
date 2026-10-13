@@ -120,6 +120,8 @@ const sr: Dict = {
     coursesTitle: "Programi",
     newsTitle: "Najnovije vesti",
     allNews: "Sve vesti",
+    newsPrev: "Prethodne vesti",
+    newsNext: "Sledeće vesti",
     highlightTitle: "Upis prve generacije",
     highlightText: "Nastava počinje u {intake} Prijave su otvorene.",
     highlightButton: "Kako se prijaviti",

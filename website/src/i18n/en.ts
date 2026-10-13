@@ -124,6 +124,8 @@ const en = {
     coursesTitle: "Courses",
     newsTitle: "Latest news",
     allNews: "All news",
+    newsPrev: "Previous news",
+    newsNext: "Next news",
     highlightTitle: "Enrollment of the first generation",
     highlightText: "Classes start in {intake}. Applications are open now.",
     highlightButton: "How to apply",

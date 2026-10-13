@@ -5,13 +5,14 @@
 :root {
   --navy: #283464;
   --navy-dark: #1d2650;
-  --yellow: #e8c142;
-  --yellow-dark: #c99f1f;
+  --yellow: #d69e49;       /* gold from the logo */
+  --yellow-dark: #9c6a2a;  /* logo bronze, dark enough for text on white */
+  --yellow-light: #f1be65; /* logo highlight gold */
   --dark: #3c3c3c;
   --text: #333;
   --muted: #5c5c5c;
   --bg: #fff;
-  --bg-soft: #f6f7f9;
+  --bg-soft: #faf6ee;      /* soft cream, warms up the gold */
   --border: #e2e4e8;
   --white: #fff;
   --danger: #b3261e;
@@ -60,7 +61,7 @@ button { font: inherit; cursor: pointer; }
 .btn-navy { background: var(--navy); color: var(--white); }
 .btn-navy:hover { background: var(--navy-dark); }
 .btn-yellow { background: var(--yellow); color: var(--navy); }
-.btn-yellow:hover { background: var(--yellow-dark); }
+.btn-yellow:hover { background: var(--yellow-light); }
 .btn-outline { background: transparent; border-color: currentColor; color: inherit; }
 .btn-outline:hover { background: rgba(255, 255, 255, .12); }
 .btn-sm { min-height: 40px; padding: 8px 18px; font-size: .9rem; }
@@ -279,6 +280,41 @@ button { font: inherit; cursor: pointer; }
 .news-card .excerpt { font-size: .92rem; color: var(--muted); flex: 1; }
 .news-card .more { color: var(--navy); font-weight: 700; font-size: .92rem; }
 .news-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: .85rem; color: var(--muted); margin-bottom: 10px; }
+
+/* Latest news on the homepage: horizontal, swipeable card strip */
+.news-scroller { position: relative; }
+.news-track {
+  display: flex; gap: 24px; overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scroll-padding-inline: 4px; scroll-behavior: smooth;
+  padding: 8px 4px 20px; margin: -8px -4px 0; scrollbar-width: thin; scrollbar-color: var(--yellow) transparent;
+}
+.news-track:focus-visible { outline-offset: -3px; }
+/* Edges fade out on the side(s) where more cards are hidden (classes set in Home.astro) */
+@property --fade-l { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --fade-r { syntax: "<length>"; inherits: false; initial-value: 0px; }
+.news-track {
+  --fade-l: 0px; --fade-r: 0px; transition: --fade-l .25s, --fade-r .25s;
+  mask-image: linear-gradient(to right, transparent, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent);
+}
+.news-scroller.more-left .news-track { --fade-l: 72px; }
+.news-scroller.more-right .news-track { --fade-r: 72px; }
+@media (max-width: 640px) { .news-scroller.more-left .news-track { --fade-l: 28px; } .news-scroller.more-right .news-track { --fade-r: 28px; } }
+.news-track > .news-card { flex: 0 0 calc((100% - 48px) / 3.25); scroll-snap-align: start; }
+@media (max-width: 900px) { .news-track > .news-card { flex-basis: calc((100% - 24px) / 2.2); } }
+@media (max-width: 640px) { .news-track > .news-card { flex-basis: 82%; } }
+@media (prefers-reduced-motion: reduce) { .news-track { scroll-behavior: auto; } }
+.scroll-btn {
+  position: absolute; top: calc(50% - 32px); z-index: 2; width: 46px; height: 46px; border-radius: 50%;
+  border: 0; background: var(--navy); color: var(--white); box-shadow: var(--shadow);
+  display: grid; place-items: center; transition: background .2s, opacity .2s;
+}
+.scroll-btn[hidden] { display: none; }
+.scroll-btn:hover { background: var(--yellow); color: var(--navy); }
+.scroll-btn:disabled { opacity: 0; pointer-events: none; }
+.scroll-btn svg { width: 22px; height: 22px; }
+.scroll-btn.prev { left: -12px; } .scroll-btn.prev svg { transform: rotate(90deg); }
+.scroll-btn.next { right: -12px; } .scroll-btn.next svg { transform: rotate(-90deg); }
+@media (max-width: 640px) { .scroll-btn { display: none; } }
 .tag { background: var(--yellow); color: var(--navy); font-weight: 700; font-size: .75rem; padding: 2px 10px; border-radius: 999px; }
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: -16px 0 32px; }
 .chip { border: 1px solid var(--navy); background: var(--white); color: var(--navy); border-radius: 999px; padding: 6px 16px; font-size: .92rem; }
