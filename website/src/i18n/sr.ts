@@ -3,7 +3,7 @@
  * "{intake}" se automatski menja datumom početka iz src/data/site.ts.
  * Vesti NISU ovde — nalaze se u src/content/news/sr/.
  */
-import en, { type Dict } from "./en";
+import type { Dict } from "./en";
 
 const sr: Dict = {
   lang: "sr",
@@ -43,6 +43,7 @@ const sr: Dict = {
       ],
     },
     { label: "Za kandidate", page: "applicants" },
+    { label: "Za nemačke partnere", page: "partners" },
     { label: "Vesti", page: "news" },
     { label: "Kontakt", page: "contact" },
   ],
@@ -80,7 +81,10 @@ const sr: Dict = {
       title: "Za kandidate – kako se prijaviti | Akademija MASOK",
       description: "Kako se prijaviti u Akademiju MASOK: pregled programa, tri koraka prijave, šta polaznici dobijaju i odgovori na česta pitanja.",
     },
-    partners: en.meta.partners,
+    partners: {
+      title: "Za nemačke partnere – obuke i ulazak na tržište Srbije | Akademija MASOK",
+      description: "Prostor za obuke, korporativni programi i poslovno savetovanje Srbija–Nemačka u Leskovcu za nemačke kompanije. Jedna kontakt osoba, naplata u evrima.",
+    },
     news: {
       title: "Vesti | Akademija MASOK",
       description: "Vesti i novosti iz Akademije MASOK u Leskovcu: upis, programi, kursevi nemačkog jezika i događaji.",
@@ -351,8 +355,95 @@ const sr: Dict = {
     formTitle: "Pošaljite nam poruku",
   },
 
-  // Stranica za partnere postoji samo na engleskom.
-  partners: en.partners,
+  partners: {
+    title: "Akademija MASOK",
+    subtitle: "Vaš partner za obuke, poslovanje i ulazak na tržište Srbije",
+    lines: [
+      "Akademija MASOK u Leskovcu nemačkim kompanijama pruža pouzdanu bazu za obuke, radionice, strateške sastanke i korporativne programe u Srbiji.",
+      "Zajedno sa našom iskusnom mrežom u Srbiji i Nemačkoj, kompanijama pružamo podršku i u analizi tržišta, razvoju poslovanja, ulasku na tržište i operativnoj realizaciji između dve zemlje.",
+      "Jedna kontakt osoba. Jedna ponuda po meri. Naplata u evrima.",
+    ],
+    buttons: ["Zatražite ponudu", "Razgovarajte sa konsultantom"],
+    stats: [
+      { icon: "plane", title: "Dolazak", lines: ["Aerodrom Niš – 55 km", "Oko 45 min"] },
+      { icon: "groups", title: "Kapacitet", lines: ["Do 40 učesnika", "Fleksibilan raspored sedenja"] },
+      { icon: "chat", title: "Podrška", lines: ["Nemački, engleski", "Srpski na licu mesta"] },
+      { icon: "network", title: "Mreža", lines: ["AHK Srbija", "Premium član"] },
+    ],
+    servicesTitle: "Naše usluge",
+    services: [
+      {
+        title: "Sastanci, obuke i korporativni programi", image: "partners-meetings", target: "meetings",
+        text: "Prostor, smeštaj, transferi, ketering, organizacija programa i podrška na licu mesta za radionice, programe obuke, sastanke menadžmenta i timske događaje.",
+      },
+      {
+        title: "Poslovno savetovanje Srbija–Nemačka", image: "partners-consulting", target: "consulting",
+        text: "Stručna analiza, procena tržišta, podrška pri ulasku na tržište i operativna, logistička i organizaciona pomoć za poslovne aktivnosti između Srbije i Nemačke.",
+      },
+    ],
+    meetingsTitle: "Sastanci, obuke i korporativni programi",
+    meetingsText: [
+      "Akademija MASOK je privatna ustanova za obrazovanje odraslih u Leskovcu, razvijena prema nemačkim standardima obuke i kvaliteta i u bliskoj saradnji sa AHK Srbija. Naš prostor je dostupan i drugim kompanijama za obuke, radionice, sastanke menadžmenta van kancelarije i timske događaje.",
+      "Bilo da planirate jednodnevnu radionicu, višednevni program obuke, sastanak menadžmenta ili timski događaj, MASOK može da organizuje infrastrukturu i usluge koje su vam potrebne na jugu Srbije.",
+      "Naš prostor prima grupe do oko 40 učesnika i može se prilagoditi različitim formatima obuka i radionica. Možemo da organizujemo pojedinačne usluge ili kompletan paket.",
+    ],
+    packages: [
+      {
+        tag: "Paket 01", title: "Sale i prostor za obuke", lead: "Za kompanije koje same organizuju putovanje i smeštaj",
+        items: ["Sale za seminare i obuke, na dan ili u bloku", "Projektor, platno, table i flipčartovi", "Wi-Fi i struja na svakom radnom mestu", "Prostorije za rad u manjim grupama", "Prostor za tehničku obuku po potrebi", "Pauze za kafu i ručak/ketering na zahtev"],
+      },
+      {
+        tag: "Paket 02", title: "Obuka i boravak", lead: "Za višednevne programe i grupe koje putuju u Srbiju",
+        items: ["Sve usluge iz Paketa 01", "Smeštaj sa doručkom u odabranim partnerskim hotelima", "Aerodromski transfer iz Niša, Beograda ili sa druge dogovorene lokacije", "Pun pansion / regionalna kuhinja prema dogovorenom programu", "Lokalni prevoz po potrebi", "Podrška u usmenom i pisanom prevođenju", "Večernji program na zahtev"],
+      },
+      {
+        tag: "Paket 03", title: "Timski programi i programi po meri", lead: "Za strateške sastanke, team building i individualno osmišljene korporativne programe",
+        items: ["Sve usluge iz Paketa 02", "Moderacija i planiranje programa na nemačkom ili engleskom", "Team building aktivnosti u zatvorenom i na otvorenom", "Radionice i moderisane sesije", "Izleti i regionalni programi, npr. Vlasinsko jezero, Niška tvrđava i lokalne vinarije", "Foto i video dokumentacija na zahtev"],
+      },
+    ],
+    priceNote: "Cena: na upit / ponuda po meri",
+    extras: [
+      { title: "Prostor", items: ["Sale za seminare sa fleksibilnim rasporedom: U-oblik, redovi ili grupni stolovi", "Projektor, platno, table i flipčartovi", "Prostor za tehničku obuku", "Posebne prostorije za rad u malim grupama", "Prostor za pauzu sa kafom i pićem", "Parking, pristup bez stepenica, štampanje i kopiranje"] },
+      { title: "Dodatne usluge", items: ["Aerodromski transferi: Niš, Beograd, Skoplje", "Nemačko-srpsko usmeno i pisano prevođenje", "Ketering, od pauze za kafu do večere", "Rezervacija smeštaja u partnerskim hotelima", "Izleti, večernji programi, foto i video dokumentacija"] },
+    ],
+    consultingTitle: "Poslovno savetovanje i ulazak na tržište Srbija – Nemačka",
+    consultingText: [
+      "Planirate poslovne aktivnosti u Srbiji ili Nemačkoj?",
+      "MASOK kompanijama omogućava pristup iskusnim konsultantima koji podržavaju poslovne aktivnosti između srpskog i nemačkog tržišta.",
+      "Pre nego što počnete, naš konsultant može da analizira vaš projekat, proceni prilike i izazove i da vam da nezavisnu procenu najboljeg pristupa. Naša podrška obuhvata sve, od prve stručne procene do stalne lokalne pomoći tokom celog projekta.",
+    ],
+    consultingSteps: [
+      ["Stručna procena", "Početna analiza kompanije, projekta, ciljeva i planirane aktivnosti na tržištu."],
+      ["Procena tržišta i izvodljivosti", "Procena tržišnog potencijala, relevantnih zahteva, prilika, rizika i praktične izvodljivosti."],
+      ["Strategija ulaska na tržište i partnerstava", "Izbor pravog pristupa ulasku na tržište i pronalaženje potencijalnih partnera, kontakata i pružalaca usluga."],
+      ["Realizacija i lokalna podrška", "Operativna, logistička i organizaciona podrška tokom realizacije, u dogovorenom obimu."],
+    ],
+    includesTitle: "U zavisnosti od projekta, savetovanje može da obuhvati:",
+    includes: ["Početnu analizu poslovanja i projekta", "Analizu srpskog ili nemačkog tržišta", "Procenu tržišnog potencijala i izvodljivosti", "Strategiju ulaska na tržište", "Pronalaženje potencijalnih poslovnih partnera i relevantnih kontakata", "Procenu lokalnih operativnih zahteva", "Podršku u uspostavljanju lokalnih struktura i poslovnih procesa", "Koordinaciju sa lokalnim pružaocima usluga i institucijama", "Logističku i organizacionu podršku", "Pripremu i koordinaciju sastanaka", "Jezičku i interkulturalnu podršku", "Stalnu koordinaciju projekta tokom realizacije"],
+    includesNote: "Usluge savetovanja definišu se pojedinačno, prema obimu i složenosti svakog zadatka. Cena: na upit.",
+    whyTitle: "Zašto da sarađujete sa nama?",
+    why: [
+      ["Lokalno prisustvo", "Pouzdana operativna baza na jugu Srbije"],
+      ["Nemačko-srpska stručnost", "Iskustvo i poslovne mreže na oba tržišta"],
+      ["Fleksibilna rešenja", "Od jedne sale za sastanke ili jednog savetovanja do kompletne podrške projektu"],
+      ["Nemački, engleski i srpski", "Komunikacija i podrška na licu mesta na sva tri jezika"],
+    ],
+    accessTitle: "Lako dostupni na jugu Srbije",
+    accessText: [
+      "Akademija MASOK nalazi se u Leskovcu, oko 55 km od aerodroma Niš (oko 45 minuta vožnje).",
+      "U zavisnosti od vašeg programa, možemo da koordiniramo aerodromske transfere, smeštaj, lokalni prevoz i kompletnu logistiku za vašu grupu.",
+      "Transferi se mogu organizovati i iz Beograda, Skoplja i sa drugih dogovorenih lokacija.",
+    ],
+    processTitle: "Od upita do realizacije",
+    process: [
+      ["Recite nam šta vam je potrebno", "Pošaljite nam željene datume, broj učesnika ili kratak opis vašeg poslovnog projekta."],
+      ["Procenjujemo vaše potrebe", "Naš tim utvrđuje koje usluge, prostor ili savetodavna podrška najbolje odgovaraju."],
+      ["Dobijate ponudu po meri", "Dobijate individualnu ponudu zasnovanu na stvarnom obimu vašeg projekta."],
+      ["Koordiniramo realizaciju", "Jedna kontakt osoba prati organizaciju i realizaciju vašeg projekta."],
+    ],
+    formTitle: "Recite nam više o vašem projektu",
+    formLead: "Bilo da organizujete program obuke u Srbiji, planirate sastanak menadžmenta ili istražujete novu poslovnu priliku između Nemačke i Srbije, pomoći ćemo vam da pronađete pravo rešenje.",
+  },
 
   newsPage: {
     title: "Vesti",

@@ -1,7 +1,7 @@
 /**
  * Every page's URL in each language.
  * The URLs match the old One.com site so existing links and Google results keep working.
- * A page that is missing in a language (e.g. "partners" in Serbian) simply has no entry.
+ * A page that is missing in a language simply has no entry (it then falls back to that language's home page).
  */
 export const languages = ["sr", "en"] as const;
 export type Lang = (typeof languages)[number];
@@ -21,6 +21,7 @@ export const routes: Record<Lang, Partial<Record<PageKey, string>>> = {
     technician: "/sr/programi/sterilizacioni-tehnicar",
     german: "/sr/programi/nemacki",
     applicants: "/sr/za-kandidate",
+    partners: "/sr/za-nemacke-partnere",
     news: "/sr/vesti/",
     contact: "/sr/kontakt",
     privacy: "/sr/politika-privatnosti",

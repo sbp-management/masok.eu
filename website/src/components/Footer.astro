@@ -37,7 +37,7 @@ const year = new Date().getFullYear();
         <h2>{d.footer.linksTitle}</h2>
         <ul class="links">
           {quick.map((p) => <li><a href={url(lang, p)}>{navLabel(p)}</a></li>)}
-          {lang === "en" && <li><a href={url("en", "partners")}>{navLabel("partners")}</a></li>}
+          <li><a href={url(lang, "partners")}>{navLabel("partners")}</a></li>
         </ul>
       </div>
 
