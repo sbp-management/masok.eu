@@ -50,6 +50,8 @@ export const site = {
 
   // External links
   applicationFormUrl: "https://forms.gle/S9MTGNXb3YbH4zZQ7",
+  // Open-day sign-up (Google Form). The QR code in public/images/qr-open-day.svg points here too.
+  openDayFormUrl: "https://forms.gle/VL2ZSf3T8oWSbcDU6",
   europassCv: "/documents/Europass_CV.docx",
   sbpManagement: "https://www.sbp-management.com/",
 } as const;

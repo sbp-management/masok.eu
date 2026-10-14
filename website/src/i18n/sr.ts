@@ -108,6 +108,14 @@ const sr: Dict = {
     ],
     primaryButton: { label: "Pogledaj programe", page: "courses" },
     secondaryButton: { label: "Prijavi se", page: "applicants" },
+    advert: {
+      headline: "DOĐI.",
+      lines: ["UPOZNAJ PROGRAM.", "PRONAĐI SVOJU BUDUĆU PROFESIJU."],
+      name: "MASOK Akademija",
+      scan: "skeniraj i prijavi se",
+      click: "ili klikni ovde",
+      qrAlt: "QR kod: prijava za dan otvorenih vrata",
+    },
     whyTitle: "Zašto Akademija MASOK?",
     why: [
       { icon: "bookmark", text: "Nastava po nemačkim standardima kvaliteta" },
@@ -157,7 +165,7 @@ const sr: Dict = {
       title: "Mehaničar za izradu i popravku hirurških instrumenata",
       form: "course",
       image: "mechanic-main",
-      gallery: ["mechanic-2", "mechanic-3"],
+      gallery: ["mechanic-2", "mechanic-3", "mechanic-tray"],
       intro: [
         "Mehaničar za izradu i popravku hirurških instrumenata je stručnjak za precizne proizvode visoke vrednosti, bez kojih ne može nijedna operaciona sala. Program osposobljava polaznike za izradu, održavanje i stručnu popravku hirurških instrumenata prema nemačkim standardima kvaliteta.",
       ],
@@ -210,7 +218,7 @@ const sr: Dict = {
       title: "Sterilizacioni tehničar",
       form: "course",
       image: "sterilization-main",
-      gallery: ["sterilization-2", "sterilization-3"],
+      gallery: ["sterilization-2", "sterilization-3", "sterilization-autoclave"],
       intro: [
         "Sterilizacioni tehničar je stručnjak za pripremu i obradu sterilnog materijala prema evropskim procesnim standardima (AEMP), sa fokusom na dokumentaciju i obezbeđenje kvaliteta. Sterilizacija je jedna od najvažnijih karika bezbednosti pacijenata u svakoj zdravstvenoj ustanovi.",
       ],

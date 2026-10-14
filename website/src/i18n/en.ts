@@ -112,6 +112,14 @@ const en = {
     ],
     primaryButton: { label: "View courses", page: "courses" },
     secondaryButton: { label: "Apply now", page: "applicants" },
+    advert: {
+      headline: "JOIN US.",
+      lines: ["DISCOVER THE PROGRAM.", "FIND YOUR FUTURE PROFESSION."],
+      name: "MASOK Academy",
+      scan: "scan and register",
+      click: "or click me",
+      qrAlt: "QR code: sign up for the open day",
+    },
     whyTitle: "Why MASOK Academy?",
     why: [
       { icon: "bookmark", text: "Teaching according to German quality standards" },
@@ -161,7 +169,7 @@ const en = {
       title: "Surgical instrument mechanic",
       form: "course",
       image: "mechanic-main",
-      gallery: ["mechanic-2", "mechanic-3"],
+      gallery: ["mechanic-2", "mechanic-3", "mechanic-tray"],
       intro: [
         "A surgical instrument mechanic is a specialist in high-value precision products that are essential in every operating room. The program trains students in the manufacture, maintenance and professional repair of surgical instruments in accordance with German quality standards.",
       ],
@@ -214,7 +222,7 @@ const en = {
       title: "Sterilization technician",
       form: "course",
       image: "sterilization-main",
-      gallery: ["sterilization-2", "sterilization-3"],
+      gallery: ["sterilization-2", "sterilization-3", "sterilization-autoclave"],
       intro: [
         "A sterilization technician is an expert in preparing and processing sterile materials according to European processing standards (AEMP), with a focus on documentation and quality assurance. Sterilization is one of the most important links in patient safety in any healthcare facility.",
       ],

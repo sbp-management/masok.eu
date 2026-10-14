@@ -26,6 +26,13 @@ export const images = {
   "nikola-banda": { file: "nikola-banda.jpg", source: OLD_SITE + "IMG_3913.JPG" },
   "milivoje-djordjevic": { file: "milivoje-djordjevic.jpg", source: OLD_SITE + "Cale.jpg" },
   "partners-hero": { file: "partners-hero.jpg", source: OLD_SITE + "pexels-vlada-karpovich-7433837.jpg" },
+  // Hero slideshow photos supplied by MASOK (2026-10-14; originals in src/assets/images/hero-candidates/).
+  // No `source`: they are not on the old site, so `npm run images` skips them.
+  "school-books": { file: "school-books.jpg" },
+  "school-lab": { file: "school-lab.jpg" },
+  // Course gallery photos from the same batch ("doctors set" and "sterilization").
+  "mechanic-tray": { file: "mechanic-tray.jpg" },
+  "sterilization-autoclave": { file: "sterilization-autoclave.jpg" },
   "partners-meetings": { file: "partners-meetings.jpg", source: OLD_SITE + "pexels-pavel-danilyuk-8761328.jpg" },
   "partners-consulting": { file: "partners-consulting.jpg", source: OLD_SITE + "pexels-ketut-subiyanto-4963359.jpg" },
 } as const;

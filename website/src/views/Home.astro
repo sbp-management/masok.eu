@@ -5,6 +5,7 @@ import Icon from "../components/Icon.astro";
 import CourseCards from "../components/CourseCards.astro";
 import NewsCard from "../components/NewsCard.astro";
 import Words from "../components/Words.astro";
+import Advert from "../components/Advert.astro";
 import { t, url, fill, type Lang, type PageKey } from "../i18n";
 import { getNews } from "../lib/news";
 import { site } from "../data/site";
@@ -15,8 +16,10 @@ const { lang } = Astro.props;
 const d = t(lang);
 const H = d.home;
 const news = (await getNews(lang)).slice(0, 8);
-// Photos that take turns behind the hero (only ones large enough for a full-width background).
-const heroSlides = ["mfa-main", "german-course"];
+// Photos that take turns behind the hero, mostly school-related. The first one loads with the page;
+// the rest follow in this order. Choices come from src/assets/images/hero-candidates/.
+const heroFirst = "school-books";
+const heroSlides = ["school-lab", "hero-instruments", "german-course"];
 const courseNames = courseKeys.map((k) => d.courses[k].title);
 
 const orgLd = {
@@ -43,7 +46,7 @@ const websiteLd = { "@context": "https://schema.org", "@type": "WebSite", name: 
 
 <Base lang={lang} page="home" title={d.meta.home.title} description={d.meta.home.description} jsonLd={[orgLd, websiteLd]}>
   <section class="hero">
-    <Photo name="hero-instruments" alt="" class="hero-bg hero-slide is-first" sizes="100vw" widths={[640, 1024, 1600, 2200]} priority />
+    <Photo name={heroFirst} alt="" class="hero-bg hero-slide is-first" sizes="100vw" widths={[640, 1024, 1600, 2200]} priority />
     {heroSlides.map((name) => (
       <template class="hero-slide-tpl">
         <Photo name={name} alt="" class="hero-bg hero-slide" sizes="100vw" widths={[640, 1024, 1600, 2200]} />
@@ -57,6 +60,7 @@ const websiteLd = { "@context": "https://schema.org", "@type": "WebSite", name: 
         <a class="btn btn-white" href={url(lang, H.primaryButton.page as PageKey)}>{H.primaryButton.label}</a>
         <a class="btn btn-navy" href={url(lang, H.secondaryButton.page as PageKey)}>{H.secondaryButton.label}</a>
       </div>
+      <Advert lang={lang} />
     </div>
   </section>
 
@@ -115,6 +119,7 @@ const websiteLd = { "@context": "https://schema.org", "@type": "WebSite", name: 
             <button class="scroll-btn prev" type="button" aria-label={H.newsPrev} hidden><Icon name="chevron" /></button>
             <button class="scroll-btn next" type="button" aria-label={H.newsNext} hidden><Icon name="chevron" /></button>
           </div>
+          <Advert lang={lang} placement="news" />
           <p class="center" style="margin-top:32px"><a class="btn btn-navy" href={url(lang, "news")}>{H.allNews}</a></p>
         </div>
       </section>
@@ -123,12 +128,12 @@ const websiteLd = { "@context": "https://schema.org", "@type": "WebSite", name: 
 </Base>
 
 <script>
-  // Hero slideshow: every 12 s the next photo slides in while the current one fades out.
+  // Hero slideshow: every 9 s the next photo slides in while the current one fades out.
   // The other photos wait in <template>s and are only added (and downloaded) shortly before their turn.
   const hero = document.querySelector<HTMLElement>(".hero");
   const templates = [...document.querySelectorAll<HTMLTemplateElement>(".hero-slide-tpl")];
   if (hero && templates.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const HOLD = 12000;
+    const HOLD = 9000;
     const slides: (HTMLElement | null)[] = [hero.querySelector<HTMLElement>(".hero-slide.is-first"), ...templates.map(() => null)];
     const slideAt = (i: number) => {
       if (!slides[i]) {
