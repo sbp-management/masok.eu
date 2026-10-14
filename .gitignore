@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.netlify/
+.env
+.env.*
+.DS_Store
+
+# Original photos MASOK supplied, kept locally for choosing (2 have stock watermarks)
+src/assets/images/hero-candidates/
