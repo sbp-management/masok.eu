@@ -6,13 +6,13 @@
   "description": "Official website of MASOK Academy, Leskovac (masok.eu)",
   "scripts": {
     "dev": "astro dev",
-    "check:launch": "node scripts/check-launch.mjs",
-    "build": "node scripts/check-launch.mjs && astro check && astro build",
+    "check:launch": "node scripts/check-launch.ts",
+    "build": "node scripts/check-launch.ts && astro check && astro build",
     "preview": "astro preview",
-    "images": "node scripts/fetch-images.mjs"
+    "images": "node scripts/fetch-images.ts"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.18"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

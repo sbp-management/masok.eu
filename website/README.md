@@ -7,12 +7,13 @@ Built with [Astro](https://astro.build) as a fast static site, hosted on [Netlif
 - Forms (applications with CV upload, contact, partner inquiries) are handled by **Netlify Forms** and emailed to you.
 - No cookies, no tracking, fonts self-hosted, so **no cookie banner is needed**.
 - Same URLs as the old One.com site, so existing links and Google results keep working.
+- All code is TypeScript. **Something broken?** See [TROUBLESHOOTING.md](TROUBLESHOOTING.md), which also has a short intro to Astro for Node.js developers.
 
 ---
 
 ## 1. Run it on your computer
 
-Requires [Node.js](https://nodejs.org) 20 or newer.
+Requires [Node.js](https://nodejs.org) 22.18 or newer (it runs the TypeScript scripts in `scripts/` directly).
 
 ```bash
 npm install        # first time only

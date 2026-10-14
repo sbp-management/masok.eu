@@ -2,7 +2,7 @@
  * Facts used across the whole site. Change them here once and every page updates.
  *
  * Lines marked "TODO(confirm)" still need the real value from MASOK.
- * `npm run build` prints a warning for every one of them (see scripts/check-launch.mjs).
+ * `npm run build` prints a warning for every one of them (see scripts/check-launch.ts).
  */
 
 export const site = {

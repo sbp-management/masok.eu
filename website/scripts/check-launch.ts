@@ -7,10 +7,10 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const warnings = [];
+const warnings: string[] = [];
 
-async function walk(dir) {
-  const out = [];
+async function walk(dir: string): Promise<string[]> {
+  const out: string[] = [];
   for (const e of await readdir(dir, { withFileTypes: true })) {
     const p = path.join(dir, e.name);
     if (e.isDirectory()) out.push(...(await walk(p)));
@@ -39,7 +39,7 @@ for (const lang of ["sr", "en"]) {
 
 // 3. Missing photos
 const imagesSrc = await readFile(path.join(root, "src/data/images.ts"), "utf8");
-const missing = [];
+const missing: string[] = [];
 for (const m of imagesSrc.matchAll(/file: "([^"]+\.(?:jpg|jpeg|png|webp))"/g)) {
   const dir = m[1] === "favicon.png" ? "public" : "src/assets/images";
   try { await access(path.join(root, dir, m[1])); } catch { missing.push(m[1]); }

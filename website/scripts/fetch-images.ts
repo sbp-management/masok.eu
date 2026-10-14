@@ -12,7 +12,7 @@ const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const src = await readFile(path.join(root, "src/data/images.ts"), "utf8");
 
 // Read the image and document lists from src/data/images.ts without a TS compiler
-const oldSite = src.match(/const OLD_SITE = "([^"]+)"/)[1];
+const oldSite = src.match(/const OLD_SITE = "([^"]+)"/)?.[1] ?? "";
 const entries = [...src.matchAll(/file: "([^"]+)", source: (OLD_SITE \+ )?"([^"]+)"/g)].map((m) => ({
   file: m[1],
   url: (m[2] ? oldSite : "") + m[3],
@@ -36,7 +36,7 @@ for (const { file, url, dir } of entries) {
     console.log(`✓ ${path.join(dir, file)}  (${Math.round(buf.length / 1024)} KB)`);
     ok++;
   } catch (err) {
-    console.error(`✗ ${file} from ${url}: ${err.message}`);
+    console.error(`✗ ${file} from ${url}: ${err instanceof Error ? err.message : err}`);
     failed++;
   }
 }

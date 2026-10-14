@@ -6,7 +6,8 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "22"
+  # Node 22.18+ runs the TypeScript helper scripts in scripts/ directly.
+  NODE_VERSION = "24"
 
 # ---------- Redirects (old One.com addresses → new pages) ----------
 [[redirects]]
