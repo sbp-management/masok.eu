@@ -33,6 +33,11 @@ export const images = {
   // Course gallery photos from the same batch ("doctors set" and "sterilization").
   "mechanic-tray": { file: "mechanic-tray.jpg" },
   "sterilization-autoclave": { file: "sterilization-autoclave.jpg" },
+  // Photos on the course cards (homepage + courses overview), supplied 2026-10-15.
+  "card-mechanic": { file: "card-mechanic.jpg" },
+  "card-mfa": { file: "card-mfa.jpg" },
+  "card-sterilization": { file: "card-sterilization.jpg" },
+  "card-languages": { file: "card-languages.jpg" },
   "partners-meetings": { file: "partners-meetings.jpg", source: OLD_SITE + "pexels-pavel-danilyuk-8761328.jpg" },
   "partners-consulting": { file: "partners-consulting.jpg", source: OLD_SITE + "pexels-ketut-subiyanto-4963359.jpg" },
 } as const;
