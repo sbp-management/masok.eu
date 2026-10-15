@@ -59,7 +59,7 @@ const en = {
     },
     courses: {
       title: "Courses | MASOK Academy",
-      description: "Our courses: surgical instrument mechanic, medical administrative assistant (MFA), sterilization technician and language courses (German, English, Spanish, Italian and more).",
+      description: "Our courses: surgical instrument mechanic, medical administrative assistant (MFA), sterilization technician and foreign language courses (English, Spanish, Italian, German and more).",
     },
     mechanic: {
       title: "Surgical instrument mechanic – 9-month course | MASOK Academy",
@@ -74,8 +74,8 @@ const en = {
       description: "Sterilization technician training according to European processing standards (AEMP). Course in preparation – register your interest now.",
     },
     german: {
-      title: "Language courses in Leskovac – German, English, Spanish, Italian & more | MASOK Academy",
-      description: "Language courses for everyone in Leskovac: German, English, Spanish, Italian, French, Danish, Russian and Serbian for foreigners – tailored to your level, schedule and goals.",
+      title: "Foreign language courses in Leskovac – English, Spanish, Italian, German & more | MASOK Academy",
+      description: "Foreign language courses for everyone in Leskovac: Danish, English, French, German, Italian, Russian, Spanish and Serbian for foreigners – tailored to your level, schedule and goals.",
     },
     applicants: {
       title: "For applicants – how to apply | MASOK Academy",
@@ -154,7 +154,7 @@ const en = {
     },
     german: {
       icon: "globe", title: "Language courses",
-      text: "German, English, Spanish, Italian and more – tailored to your level, pace and goals.",
+      text: "Learn the foreign language you need – English, Spanish, Italian, German and more, tailored to your level, pace and goals.",
     },
   },
 
@@ -250,21 +250,21 @@ const en = {
       image: "german-course",
       gallery: [],
       intro: [
-        "Our language courses are open to everyone. Classes follow German quality standards, in small groups or one-to-one, with experienced instructors – in German and many other languages.",
+        "Our foreign language courses are open to everyone. Small groups or one-to-one lessons with experienced instructors, taught to high quality standards – whichever language you want to learn.",
       ],
       showcase: {
-        greetings: ["Hallo", "Hello", "¡Hola!", "Ciao", "Bonjour", "Hej", "Zdravo", "Привет"],
+        greetings: ["Hello", "¡Hola!", "Bonjour", "Ciao", "Hallo", "Hej", "Zdravo", "Привет"],
         title: "One academy. Any language.",
-        lead: "German is at the heart of everything we do – but it is only the beginning. Tell us which language you want to learn, and we will put together a course that fits your level, your schedule and your goals.",
+        lead: "Tell us which language you want to learn, and we will put together a course that fits your level, your schedule and your goals.",
         languages: [
-          { greet: "Hallo", name: "German", tag: "" },
-          { greet: "Hello", name: "English", tag: "" },
-          { greet: "¡Hola!", name: "Spanish", tag: "" },
-          { greet: "Ciao", name: "Italian", tag: "" },
-          { greet: "Bonjour", name: "French", tag: "" },
           { greet: "Hej", name: "Danish", tag: "" },
-          { greet: "Zdravo", name: "Serbian for foreigners", tag: "" },
+          { greet: "Hello", name: "English", tag: "" },
+          { greet: "Bonjour", name: "French", tag: "" },
+          { greet: "Hallo", name: "German", tag: "" },
+          { greet: "Ciao", name: "Italian", tag: "" },
           { greet: "Привет", name: "Russian", tag: "" },
+          { greet: "Zdravo", name: "Serbian for foreigners", tag: "" },
+          { greet: "¡Hola!", name: "Spanish", tag: "" },
         ],
         moreTitle: "Your language?",
         moreText: "Not on the list? Tell us which language you need and we will find the right instructor for you.",
@@ -281,8 +281,7 @@ const en = {
         {
           title: "Languages",
           items: [
-            "German, including professional German for medicine and technology",
-            "English, Spanish, Italian, French, Danish and Russian",
+            "Danish, English, French, German, Italian, Russian and Spanish",
             "Serbian for foreigners",
             "Other languages on request",
           ],
@@ -290,7 +289,7 @@ const en = {
         {
           title: "Levels",
           items: [
-            "From beginner (A1) upwards, according to the Common European Framework of Reference for Languages (CEFR) – German up to B2, other languages and levels by arrangement",
+            "From beginner (A1) upwards, according to the Common European Framework of Reference for Languages (CEFR) – levels arranged for each language and group",
             "Free placement test to find the right group",
           ],
         },
@@ -299,7 +298,7 @@ const en = {
           items: [
             "General language courses",
             "Professional language for medicine and technology",
-            "Preparation for international exams (e.g. Goethe, telc and ÖSD for German)",
+            "Preparation for internationally recognized language exams",
             "Courses for companies",
             "Small groups or one-to-one lessons",
           ],
@@ -348,7 +347,7 @@ const en = {
       ],
       technician: ["Course in preparation – register your interest"],
       german: [
-        "German, English, Spanish, Italian, French, Danish, Russian, Serbian for foreigners – and more on request",
+        "Danish, English, French, German, Italian, Russian, Spanish, Serbian for foreigners – and more on request",
         "All levels, free placement test", "Small groups or one-to-one",
         "Price on request", "Academy certificate for each completed level",
       ],
@@ -376,7 +375,7 @@ const en = {
       ["Is the certificate recognized internationally?", "Yes, the AHK certificate is internationally recognized."],
       ["Is there practical training?", "Yes. All programs follow the dual model, and professional visits and observations at German partner institutions are also planned."],
       ["How do I apply?", "Through the online application form on this website – choose your course and send us your details and CV."],
-      ["Can I take only a language course?", "Yes. Our language courses – German and many other languages – are open to everyone, whether or not you are enrolled in one of the Academy's programs."],
+      ["Can I take only a language course?", "Yes. Our foreign language courses are open to everyone, whether or not you are enrolled in one of the Academy's programs."],
       ["Does a completed German course count if I later enroll in a program?", "Yes. The level you reach is recognized and taken into account in the language training within the program."],
     ],
     formTitle: "Apply now",

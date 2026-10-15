@@ -59,7 +59,7 @@ const sr: Dict = {
     },
     courses: {
       title: "Programi | Akademija MASOK",
-      description: "Naši programi: mehaničar za izradu i popravku hirurških instrumenata, medicinski administrativni asistent (MFA), sterilizacioni tehničar i kursevi stranih jezika (nemački, engleski, španski, italijanski i drugi).",
+      description: "Naši programi: mehaničar za izradu i popravku hirurških instrumenata, medicinski administrativni asistent (MFA), sterilizacioni tehničar i kursevi stranih jezika (engleski, španski, italijanski, nemački i drugi).",
     },
     mechanic: {
       title: "Mehaničar za izradu i popravku hirurških instrumenata | Akademija MASOK",
@@ -74,8 +74,8 @@ const sr: Dict = {
       description: "Obuka za sterilizacionog tehničara prema evropskim procesnim standardima (AEMP). Program u pripremi – prijavite interesovanje.",
     },
     german: {
-      title: "Kursevi stranih jezika u Leskovcu – nemački, engleski, španski, italijanski i drugi | Akademija MASOK",
-      description: "Kursevi stranih jezika za sve u Leskovcu: nemački, engleski, španski, italijanski, francuski, danski, ruski i srpski za strance – prilagođeni vašem nivou, rasporedu i ciljevima.",
+      title: "Kursevi stranih jezika u Leskovcu – engleski, španski, italijanski, nemački i drugi | Akademija MASOK",
+      description: "Kursevi stranih jezika za sve u Leskovcu: danski, engleski, francuski, italijanski, nemački, ruski, španski i srpski za strance – prilagođeni vašem nivou, rasporedu i ciljevima.",
     },
     applicants: {
       title: "Za kandidate – kako se prijaviti | Akademija MASOK",
@@ -154,7 +154,7 @@ const sr: Dict = {
     },
     german: {
       icon: "globe", title: "Kursevi stranih jezika",
-      text: "Nemački, engleski, španski, italijanski i drugi jezici – prilagođeni vašem nivou, tempu i ciljevima.",
+      text: "Naučite strani jezik koji vam je potreban – engleski, španski, italijanski, nemački i drugi, prilagođeno vašem nivou, tempu i ciljevima.",
     },
   },
 
@@ -250,21 +250,21 @@ const sr: Dict = {
       image: "german-course",
       gallery: [],
       intro: [
-        "Kursevi stranih jezika otvoreni su za sve zainteresovane. Nastava se izvodi po nemačkim standardima kvaliteta, u malim grupama ili individualno, sa iskusnim predavačima – na nemačkom i mnogim drugim jezicima.",
+        "Kursevi stranih jezika otvoreni su za sve zainteresovane. Nastava se izvodi u malim grupama ili individualno, sa iskusnim predavačima i po visokim standardima kvaliteta – za koji god jezik želite da naučite.",
       ],
       showcase: {
-        greetings: ["Hallo", "Hello", "¡Hola!", "Ciao", "Bonjour", "Hej", "Zdravo", "Привет"],
+        greetings: ["Hello", "¡Hola!", "Bonjour", "Ciao", "Hallo", "Hej", "Zdravo", "Привет"],
         title: "Jedna akademija. Bilo koji jezik.",
-        lead: "Nemački je u srcu svega što radimo – ali to je tek početak. Recite nam koji jezik želite da naučite, a mi ćemo sastaviti kurs prilagođen vašem nivou, rasporedu i ciljevima.",
+        lead: "Recite nam koji jezik želite da naučite, a mi ćemo sastaviti kurs prilagođen vašem nivou, rasporedu i ciljevima.",
         languages: [
-          { greet: "Hallo", name: "Nemački", tag: "" },
-          { greet: "Hello", name: "Engleski", tag: "" },
-          { greet: "¡Hola!", name: "Španski", tag: "" },
-          { greet: "Ciao", name: "Italijanski", tag: "" },
-          { greet: "Bonjour", name: "Francuski", tag: "" },
           { greet: "Hej", name: "Danski", tag: "" },
-          { greet: "Zdravo", name: "Srpski za strance", tag: "" },
+          { greet: "Hello", name: "Engleski", tag: "" },
+          { greet: "Bonjour", name: "Francuski", tag: "" },
+          { greet: "Ciao", name: "Italijanski", tag: "" },
+          { greet: "Hallo", name: "Nemački", tag: "" },
           { greet: "Привет", name: "Ruski", tag: "" },
+          { greet: "Zdravo", name: "Srpski za strance", tag: "" },
+          { greet: "¡Hola!", name: "Španski", tag: "" },
         ],
         moreTitle: "Vaš jezik?",
         moreText: "Nije na listi? Recite nam koji jezik vam je potreban, a mi ćemo pronaći pravog predavača za vas.",
@@ -281,8 +281,7 @@ const sr: Dict = {
         {
           title: "Jezici",
           items: [
-            "Nemački, uključujući stručni nemački za medicinu i tehniku",
-            "Engleski, španski, italijanski, francuski, danski i ruski",
+            "Danski, engleski, francuski, italijanski, nemački, ruski i španski",
             "Srpski za strance",
             "Drugi jezici na upit",
           ],
@@ -290,7 +289,7 @@ const sr: Dict = {
         {
           title: "Nivoi",
           items: [
-            "Od početnog nivoa (A1) naviše, prema Zajedničkom evropskom okviru za jezike (CEFR) – nemački do B2, ostali jezici i nivoi po dogovoru",
+            "Od početnog nivoa (A1) naviše, prema Zajedničkom evropskom okviru za jezike (CEFR) – nivoi se dogovaraju za svaki jezik i grupu",
             "Besplatno ulazno testiranje za raspoređivanje u odgovarajuću grupu",
           ],
         },
@@ -299,7 +298,7 @@ const sr: Dict = {
           items: [
             "Opšti kursevi jezika",
             "Stručni jezik za medicinu i tehniku",
-            "Priprema za međunarodne ispite (npr. Goethe, telc i ÖSD za nemački)",
+            "Priprema za međunarodno priznate ispite iz jezika",
             "Kursevi za firme",
             "Male grupe ili individualna nastava",
           ],
@@ -348,7 +347,7 @@ const sr: Dict = {
       ],
       technician: ["Program u pripremi – prijavite interesovanje"],
       german: [
-        "Nemački, engleski, španski, italijanski, francuski, danski, ruski, srpski za strance – i drugi na upit",
+        "Danski, engleski, francuski, italijanski, nemački, ruski, španski, srpski za strance – i drugi na upit",
         "Svi nivoi, besplatno ulazno testiranje", "Male grupe ili individualna nastava",
         "Cena na upit", "Sertifikat Akademije o završenom nivou",
       ],
@@ -376,7 +375,7 @@ const sr: Dict = {
       ["Da li je sertifikat priznat u inostranstvu?", "Da, AHK sertifikat je međunarodno priznat."],
       ["Da li postoji praksa?", "Da. Svi programi se realizuju po dualnom modelu, a predviđene su i stručne posete i hospitacije kod nemačkih partnera."],
       ["Kako se prijavljujem?", "Putem onlajn formulara na ovom sajtu – izaberite program i pošaljite nam svoje podatke i biografiju."],
-      ["Da li mogu da pohađam samo kurs jezika?", "Da. Kursevi stranih jezika – nemačkog i mnogih drugih – otvoreni su za sve, nezavisno od upisa na obrazovne programe Akademije."],
+      ["Da li mogu da pohađam samo kurs jezika?", "Da. Kursevi stranih jezika otvoreni su za sve, nezavisno od upisa na obrazovne programe Akademije."],
       ["Da li se završen kurs nemačkog priznaje pri upisu na program?", "Da. Postignuti nivo se priznaje i uzima u obzir prilikom jezičke obuke u okviru programa."],
     ],
     formTitle: "Prijavi se",
