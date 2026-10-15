@@ -22,7 +22,7 @@ The first generation starts training in October 2026. Programs you can discover:
 - [Surgical Instrument Mechanic](/en/courses/mechanic)
 - [Medical Administrative Assistant (MFA)](/en/courses/assistant)
 - [Sterilization Technician](/en/courses/technician)
-- [German language courses](/en/courses/german-language-courses)
+- [Language courses](/en/courses/language-courses)
 
 ## How to register
 

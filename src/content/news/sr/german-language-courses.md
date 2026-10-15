@@ -1,17 +1,17 @@
 ---
-title: "Kursevi nemačkog jezika otvoreni za sve"
-description: "Nivoi A1–B2, male grupe i besplatno ulazno testiranje – a nije potrebno da budete upisani na program Akademije."
+title: "Kursevi stranih jezika otvoreni za sve"
+description: "Nemački, engleski, španski, italijanski i drugi jezici – male grupe ili individualno, besplatno ulazno testiranje, a nije potrebno da budete upisani na program Akademije."
 date: 2026-07-10
-category: "Kursevi nemačkog"
+category: "Kursevi jezika"
 image: "german-course"
-imageAlt: "Čas nemačkog jezika"
+imageAlt: "Čas stranog jezika"
 sample: true
 ---
 
-Kursevi nemačkog jezika u Akademiji MASOK otvoreni su za sve zainteresovane. Nastava se izvodi po nemačkim standardima kvaliteta, u malim grupama, sa iskusnim predavačima.
+Kursevi stranih jezika u Akademiji MASOK otvoreni su za sve zainteresovane – na nemačkom i mnogim drugim jezicima, uključujući engleski, španski, italijanski, francuski, danski, ruski i srpski za strance. Nastava se izvodi po nemačkim standardima kvaliteta, u malim grupama ili individualno, sa iskusnim predavačima.
 
-## Nivoi i moduli
+## Nivoi i oblici nastave
 
-Kursevi obuhvataju nivoe od A1 do B2 prema Zajedničkom evropskom okviru za jezike (CEFR). Besplatno ulazno testiranje određuje odgovarajuću grupu. Moduli uključuju opšti nemački, stručni nemački za medicinu i tehniku, pripremu za ispite Goethe, telc i ÖSD, kao i kurseve za firme.
+Kursevi počinju od početnog nivoa (A1) prema Zajedničkom evropskom okviru za jezike (CEFR). Nemački se uči do nivoa B2, a ostali jezici i nivoi dogovaraju se pojedinačno. Besplatno ulazno testiranje određuje odgovarajuću grupu. Oblici nastave uključuju opšte kurseve jezika, stručni jezik za medicinu i tehniku, pripremu za ispite (za nemački: Goethe, telc i ÖSD) i kurseve za firme.
 
-Polaznici dobijaju sertifikat Akademije za svaki završeni nivo. Cena je na upit – [kontaktirajte nas](/sr/kontakt) za datum početka sledećeg kursa.
+Polaznici dobijaju sertifikat Akademije za svaki završeni nivo. Cena je na upit – [pogledajte sve jezike](/sr/programi/jezici) ili [kontaktirajte nas](/sr/kontakt) za datum početka sledećeg kursa.

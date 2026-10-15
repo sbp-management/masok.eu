@@ -31,6 +31,17 @@
   to = "/"
   status = 301
 
+# Language courses page renamed (2026-10-15): German only → many languages
+[[redirects]]
+  from = "/sr/programi/nemacki"
+  to = "/sr/programi/jezici"
+  status = 301
+
+[[redirects]]
+  from = "/en/courses/german-language-courses"
+  to = "/en/courses/language-courses"
+  status = 301
+
 # Old One.com file paths (e.g. the Europass CV template)
 [[redirects]]
   from = "/onewebmedia/Europass_CV.docx"

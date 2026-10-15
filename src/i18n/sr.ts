@@ -39,7 +39,7 @@ const sr: Dict = {
         { label: "Mehaničar za izradu i popravku hirurških instrumenata", page: "mechanic" },
         { label: "Medicinski administrativni asistent (MFA)", page: "assistant" },
         { label: "Sterilizacioni tehničar", page: "technician" },
-        { label: "Kursevi nemačkog jezika", page: "german" },
+        { label: "Kursevi stranih jezika", page: "german" },
       ],
     },
     { label: "Za kandidate", page: "applicants" },
@@ -51,7 +51,7 @@ const sr: Dict = {
   meta: {
     home: {
       title: "Akademija MASOK – Stručno obrazovanje po nemačkim standardima u Leskovcu",
-      description: "Akademija MASOK u Leskovcu: stručno obrazovanje po nemačkim standardima kvaliteta uz međunarodno priznat AHK sertifikat. Programi za mehaničare hirurških instrumenata, medicinske asistente i kursevi nemačkog.",
+      description: "Akademija MASOK u Leskovcu: stručno obrazovanje po nemačkim standardima kvaliteta uz međunarodno priznat AHK sertifikat. Programi za mehaničare hirurških instrumenata, medicinske asistente i kursevi stranih jezika.",
     },
     about: {
       title: "O nama | Akademija MASOK",
@@ -59,7 +59,7 @@ const sr: Dict = {
     },
     courses: {
       title: "Programi | Akademija MASOK",
-      description: "Naši programi: mehaničar za izradu i popravku hirurških instrumenata, medicinski administrativni asistent (MFA), sterilizacioni tehničar i kursevi nemačkog jezika A1–B2.",
+      description: "Naši programi: mehaničar za izradu i popravku hirurških instrumenata, medicinski administrativni asistent (MFA), sterilizacioni tehničar i kursevi stranih jezika (nemački, engleski, španski, italijanski i drugi).",
     },
     mechanic: {
       title: "Mehaničar za izradu i popravku hirurških instrumenata | Akademija MASOK",
@@ -74,8 +74,8 @@ const sr: Dict = {
       description: "Obuka za sterilizacionog tehničara prema evropskim procesnim standardima (AEMP). Program u pripremi – prijavite interesovanje.",
     },
     german: {
-      title: "Kursevi nemačkog jezika A1–B2 u Leskovcu | Akademija MASOK",
-      description: "Kursevi nemačkog jezika A1–B2 u Leskovcu u malim grupama: opšti i stručni nemački, priprema za ispite (Goethe, telc, ÖSD) i kursevi za firme.",
+      title: "Kursevi stranih jezika u Leskovcu – nemački, engleski, španski, italijanski i drugi | Akademija MASOK",
+      description: "Kursevi stranih jezika za sve u Leskovcu: nemački, engleski, španski, italijanski, francuski, danski, ruski i srpski za strance – prilagođeni vašem nivou, rasporedu i ciljevima.",
     },
     applicants: {
       title: "Za kandidate – kako se prijaviti | Akademija MASOK",
@@ -87,7 +87,7 @@ const sr: Dict = {
     },
     news: {
       title: "Vesti | Akademija MASOK",
-      description: "Vesti i novosti iz Akademije MASOK u Leskovcu: upis, programi, kursevi nemačkog jezika i događaji.",
+      description: "Vesti i novosti iz Akademije MASOK u Leskovcu: upis, programi, kursevi stranih jezika i događaji.",
     },
     contact: {
       title: "Kontakt | Akademija MASOK",
@@ -153,8 +153,8 @@ const sr: Dict = {
       text: "Stručnjak za pripremu i obradu sterilnog materijala prema evropskim procesnim standardima (AEMP).",
     },
     german: {
-      icon: "globe", title: "Kursevi nemačkog jezika",
-      text: "Otvoreni za sve. Male grupe, iskusni predavači i nemački standardi kvaliteta.",
+      icon: "globe", title: "Kursevi stranih jezika",
+      text: "Nemački, engleski, španski, italijanski i drugi jezici – prilagođeni vašem nivou, tempu i ciljevima.",
     },
   },
 
@@ -245,35 +245,70 @@ const sr: Dict = {
       why: "Sterilizacija je jedan od najvažnijih koraka u sprečavanju infekcija i bezbednom pružanju zdravstvene zaštite. Program je namenjen svima koji žele da steknu praktično i stručno znanje za rad u sterilizaciji, uz razumevanje celokupnog procesa – od prijema i pripreme instrumenata, preko čišćenja, pakovanja i sterilizacije, do kontrole kvaliteta, pravilnog skladištenja i dokumentovanja procesa.",
     },
     german: {
-      title: "Kursevi nemačkog jezika",
+      title: "Kursevi stranih jezika",
       form: "course",
       image: "german-course",
       gallery: [],
       intro: [
-        "Kursevi nemačkog jezika otvoreni su za sve zainteresovane. Nastava se izvodi po nemačkim standardima kvaliteta, u malim grupama, sa iskusnim predavačima.",
+        "Kursevi stranih jezika otvoreni su za sve zainteresovane. Nastava se izvodi po nemačkim standardima kvaliteta, u malim grupama ili individualno, sa iskusnim predavačima – na nemačkom i mnogim drugim jezicima.",
       ],
+      showcase: {
+        greetings: ["Hallo", "Hello", "¡Hola!", "Ciao", "Bonjour", "Hej", "Zdravo", "Привет"],
+        title: "Jedna akademija. Bilo koji jezik.",
+        lead: "Nemački je u srcu svega što radimo – ali to je tek početak. Recite nam koji jezik želite da naučite, a mi ćemo sastaviti kurs prilagođen vašem nivou, rasporedu i ciljevima.",
+        languages: [
+          { greet: "Hallo", name: "Nemački", tag: "" },
+          { greet: "Hello", name: "Engleski", tag: "" },
+          { greet: "¡Hola!", name: "Španski", tag: "" },
+          { greet: "Ciao", name: "Italijanski", tag: "" },
+          { greet: "Bonjour", name: "Francuski", tag: "" },
+          { greet: "Hej", name: "Danski", tag: "" },
+          { greet: "Zdravo", name: "Srpski za strance", tag: "" },
+          { greet: "Привет", name: "Ruski", tag: "" },
+        ],
+        moreTitle: "Vaš jezik?",
+        moreText: "Nije na listi? Recite nam koji jezik vam je potreban, a mi ćemo pronaći pravog predavača za vas.",
+        moreCta: "Pitajte za vaš jezik",
+        tailoredTitle: "Prilagođeno vama",
+        tailored: [
+          { icon: "language", title: "Vaš jezik", text: "Izaberite neki od jezika iznad ili zatražite neki drugi." },
+          { icon: "star", title: "Vaš nivo", text: "Od potpunog početnika naviše, uz besplatno ulazno testiranje da počnete od prave tačke." },
+          { icon: "clock", title: "Vaš tempo", text: "Male grupe ili individualni časovi, intenzivno ili uz posao ili školu." },
+          { icon: "bookmark", title: "Vaš cilj", text: "Svakodnevna komunikacija, posao i medicina, međunarodni ispiti ili kurs za vašu firmu." },
+        ],
+      },
       blocks: [
+        {
+          title: "Jezici",
+          items: [
+            "Nemački, uključujući stručni nemački za medicinu i tehniku",
+            "Engleski, španski, italijanski, francuski, danski i ruski",
+            "Srpski za strance",
+            "Drugi jezici na upit",
+          ],
+        },
         {
           title: "Nivoi",
           items: [
-            "Nivoi A1–B2 prema Zajedničkom evropskom okviru za jezike (CEFR)",
+            "Od početnog nivoa (A1) naviše, prema Zajedničkom evropskom okviru za jezike (CEFR) – nemački do B2, ostali jezici i nivoi po dogovoru",
             "Besplatno ulazno testiranje za raspoređivanje u odgovarajuću grupu",
           ],
         },
         {
-          title: "Moduli",
+          title: "Oblici nastave",
           items: [
-            "Opšti nemački",
-            "Stručni nemački za medicinu i tehniku",
-            "Priprema za međunarodne ispite (Goethe, telc, ÖSD)",
+            "Opšti kursevi jezika",
+            "Stručni jezik za medicinu i tehniku",
+            "Priprema za međunarodne ispite (npr. Goethe, telc i ÖSD za nemački)",
             "Kursevi za firme",
+            "Male grupe ili individualna nastava",
           ],
         },
         {
           title: "Ključne informacije",
           items: [
             ["Upis", "Uskoro"],
-            ["Trajanje ciklusa", "Uskoro"],
+            ["Trajanje ciklusa", "Zavisi od jezika, nivoa i oblika nastave"],
             ["Cena", "Na upit"],
             ["Sertifikat", "Sertifikat Akademije o završenom nivou"],
           ],
@@ -313,8 +348,8 @@ const sr: Dict = {
       ],
       technician: ["Program u pripremi – prijavite interesovanje"],
       german: [
-        "Nivoi A1–B2", "Besplatno ulazno testiranje",
-        "Opšti nemački, stručni nemački za medicinu i tehniku, priprema za ispite (Goethe, telc, ÖSD), kursevi za firme",
+        "Nemački, engleski, španski, italijanski, francuski, danski, ruski, srpski za strance – i drugi na upit",
+        "Svi nivoi, besplatno ulazno testiranje", "Male grupe ili individualna nastava",
         "Cena na upit", "Sertifikat Akademije o završenom nivou",
       ],
     },
@@ -341,7 +376,7 @@ const sr: Dict = {
       ["Da li je sertifikat priznat u inostranstvu?", "Da, AHK sertifikat je međunarodno priznat."],
       ["Da li postoji praksa?", "Da. Svi programi se realizuju po dualnom modelu, a predviđene su i stručne posete i hospitacije kod nemačkih partnera."],
       ["Kako se prijavljujem?", "Putem onlajn formulara na ovom sajtu – izaberite program i pošaljite nam svoje podatke i biografiju."],
-      ["Da li mogu da pohađam samo kurs nemačkog?", "Da. Kursevi nemačkog jezika otvoreni su za sve, nezavisno od upisa na obrazovne programe Akademije."],
+      ["Da li mogu da pohađam samo kurs jezika?", "Da. Kursevi stranih jezika – nemačkog i mnogih drugih – otvoreni su za sve, nezavisno od upisa na obrazovne programe Akademije."],
       ["Da li se završen kurs nemačkog priznaje pri upisu na program?", "Da. Postignuti nivo se priznaje i uzima u obzir prilikom jezičke obuke u okviru programa."],
     ],
     formTitle: "Prijavi se",
@@ -465,7 +500,7 @@ const sr: Dict = {
       mechanic: "Mehaničar za izradu i popravku hirurških instrumenata",
       assistant: "Medicinski administrativni asistent (MFA)",
       technician: "Sterilizacioni tehničar",
-      german: "Kursevi nemačkog jezika",
+      german: "Kursevi stranih jezika",
     },
     message: "Poruka",
     cv: "Biografija (CV)",

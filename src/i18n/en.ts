@@ -38,7 +38,7 @@ const en = {
         { label: "Surgical instrument mechanic", page: "mechanic" },
         { label: "Medical administrative assistant (MFA)", page: "assistant" },
         { label: "Sterilization technician", page: "technician" },
-        { label: "German language courses", page: "german" },
+        { label: "Language courses", page: "german" },
       ],
     },
     { label: "For applicants", page: "applicants" },
@@ -51,7 +51,7 @@ const en = {
   meta: {
     home: {
       title: "MASOK Academy – Vocational training to German standards in Leskovac",
-      description: "MASOK Academy in Leskovac, Serbia: vocational training to German quality standards with an internationally recognized AHK certificate. Courses for surgical instrument mechanics, medical assistants and German.",
+      description: "MASOK Academy in Leskovac, Serbia: vocational training to German quality standards with an internationally recognized AHK certificate. Courses for surgical instrument mechanics, medical assistants and languages.",
     },
     about: {
       title: "About us | MASOK Academy",
@@ -59,7 +59,7 @@ const en = {
     },
     courses: {
       title: "Courses | MASOK Academy",
-      description: "Our courses: surgical instrument mechanic, medical administrative assistant (MFA), sterilization technician and German language courses A1–B2.",
+      description: "Our courses: surgical instrument mechanic, medical administrative assistant (MFA), sterilization technician and language courses (German, English, Spanish, Italian and more).",
     },
     mechanic: {
       title: "Surgical instrument mechanic – 9-month course | MASOK Academy",
@@ -74,8 +74,8 @@ const en = {
       description: "Sterilization technician training according to European processing standards (AEMP). Course in preparation – register your interest now.",
     },
     german: {
-      title: "German language courses A1–B2 in Leskovac | MASOK Academy",
-      description: "German courses A1–B2 in Leskovac in small groups: general and professional German, exam preparation (Goethe, telc, ÖSD) and courses for companies.",
+      title: "Language courses in Leskovac – German, English, Spanish, Italian & more | MASOK Academy",
+      description: "Language courses for everyone in Leskovac: German, English, Spanish, Italian, French, Danish, Russian and Serbian for foreigners – tailored to your level, schedule and goals.",
     },
     applicants: {
       title: "For applicants – how to apply | MASOK Academy",
@@ -87,7 +87,7 @@ const en = {
     },
     news: {
       title: "News | MASOK Academy",
-      description: "News and updates from MASOK Academy in Leskovac: enrollment, courses, German language classes and events.",
+      description: "News and updates from MASOK Academy in Leskovac: enrollment, courses, language courses and events.",
     },
     contact: {
       title: "Contact | MASOK Academy",
@@ -153,8 +153,8 @@ const en = {
       text: "An expert in preparing and processing sterile material according to European processing standards (AEMP).",
     },
     german: {
-      icon: "globe", title: "German language courses",
-      text: "Open to everyone. Small groups, experienced instructors and German quality standards.",
+      icon: "globe", title: "Language courses",
+      text: "German, English, Spanish, Italian and more – tailored to your level, pace and goals.",
     },
   },
 
@@ -245,35 +245,70 @@ const en = {
       why: "Sterilization is one of the most important steps in preventing infections and providing safe healthcare. This course is for anyone who wants practical and professional knowledge for working in sterilization, covering the whole process – from receiving and preparing instruments, through cleaning, packaging and sterilization, to quality control, proper storage and documentation.",
     },
     german: {
-      title: "German language courses",
+      title: "Language courses",
       form: "course",
       image: "german-course",
       gallery: [],
       intro: [
-        "Our German language courses are open to everyone. Classes follow German quality standards, in small groups, with experienced instructors.",
+        "Our language courses are open to everyone. Classes follow German quality standards, in small groups or one-to-one, with experienced instructors – in German and many other languages.",
       ],
+      showcase: {
+        greetings: ["Hallo", "Hello", "¡Hola!", "Ciao", "Bonjour", "Hej", "Zdravo", "Привет"],
+        title: "One academy. Any language.",
+        lead: "German is at the heart of everything we do – but it is only the beginning. Tell us which language you want to learn, and we will put together a course that fits your level, your schedule and your goals.",
+        languages: [
+          { greet: "Hallo", name: "German", tag: "" },
+          { greet: "Hello", name: "English", tag: "" },
+          { greet: "¡Hola!", name: "Spanish", tag: "" },
+          { greet: "Ciao", name: "Italian", tag: "" },
+          { greet: "Bonjour", name: "French", tag: "" },
+          { greet: "Hej", name: "Danish", tag: "" },
+          { greet: "Zdravo", name: "Serbian for foreigners", tag: "" },
+          { greet: "Привет", name: "Russian", tag: "" },
+        ],
+        moreTitle: "Your language?",
+        moreText: "Not on the list? Tell us which language you need and we will find the right instructor for you.",
+        moreCta: "Ask about your language",
+        tailoredTitle: "Tailored to you",
+        tailored: [
+          { icon: "language", title: "Your language", text: "Choose one of the languages above or ask for another one." },
+          { icon: "star", title: "Your level", text: "From complete beginner upwards, with a free placement test so you start at the right point." },
+          { icon: "clock", title: "Your pace", text: "Small groups or one-to-one lessons, intensive or alongside work or school." },
+          { icon: "bookmark", title: "Your goal", text: "Everyday conversation, work and medicine, international exams or a course for your company." },
+        ],
+      },
       blocks: [
+        {
+          title: "Languages",
+          items: [
+            "German, including professional German for medicine and technology",
+            "English, Spanish, Italian, French, Danish and Russian",
+            "Serbian for foreigners",
+            "Other languages on request",
+          ],
+        },
         {
           title: "Levels",
           items: [
-            "Levels A1–B2 according to the Common European Framework of Reference for Languages (CEFR)",
+            "From beginner (A1) upwards, according to the Common European Framework of Reference for Languages (CEFR) – German up to B2, other languages and levels by arrangement",
             "Free placement test to find the right group",
           ],
         },
         {
-          title: "Modules",
+          title: "Formats",
           items: [
-            "General German",
-            "Professional German for medicine and technology",
-            "Preparation for international exams (Goethe, telc, ÖSD)",
+            "General language courses",
+            "Professional language for medicine and technology",
+            "Preparation for international exams (e.g. Goethe, telc and ÖSD for German)",
             "Courses for companies",
+            "Small groups or one-to-one lessons",
           ],
         },
         {
           title: "Key information",
           items: [
             ["Enrollment", "Coming soon"],
-            ["Course length", "Coming soon"],
+            ["Course length", "Depends on the language, level and format"],
             ["Price", "On request"],
             ["Certificate", "Academy certificate for each completed level"],
           ],
@@ -313,8 +348,8 @@ const en = {
       ],
       technician: ["Course in preparation – register your interest"],
       german: [
-        "Levels A1–B2", "Free placement test",
-        "General German, professional German for medicine and technology, exam preparation (Goethe, telc, ÖSD), courses for companies",
+        "German, English, Spanish, Italian, French, Danish, Russian, Serbian for foreigners – and more on request",
+        "All levels, free placement test", "Small groups or one-to-one",
         "Price on request", "Academy certificate for each completed level",
       ],
     },
@@ -341,7 +376,7 @@ const en = {
       ["Is the certificate recognized internationally?", "Yes, the AHK certificate is internationally recognized."],
       ["Is there practical training?", "Yes. All programs follow the dual model, and professional visits and observations at German partner institutions are also planned."],
       ["How do I apply?", "Through the online application form on this website – choose your course and send us your details and CV."],
-      ["Can I take only a German course?", "Yes. Our German language courses are open to everyone, whether or not you are enrolled in one of the Academy's programs."],
+      ["Can I take only a language course?", "Yes. Our language courses – German and many other languages – are open to everyone, whether or not you are enrolled in one of the Academy's programs."],
       ["Does a completed German course count if I later enroll in a program?", "Yes. The level you reach is recognized and taken into account in the language training within the program."],
     ],
     formTitle: "Apply now",
@@ -465,7 +500,7 @@ const en = {
       mechanic: "Surgical instrument mechanic",
       assistant: "Medical administrative assistant (MFA)",
       technician: "Sterilization technician",
-      german: "German language courses",
+      german: "Language courses",
     },
     message: "Message",
     cv: "CV",

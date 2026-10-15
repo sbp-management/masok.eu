@@ -22,7 +22,7 @@ Prva generacija počinje obuku u oktobru 2026. Programi koje možeš da upoznaš
 - [Mehaničar za izradu i popravku hirurških instrumenata](/sr/programi/mehanicar)
 - [Medicinski administrativni asistent (MFA)](/sr/programi/mfa)
 - [Sterilizacioni tehničar](/sr/programi/sterilizacioni-tehnicar)
-- [Kursevi nemačkog jezika](/sr/programi/nemacki)
+- [Kursevi stranih jezika](/sr/programi/jezici)
 
 ## Kako da se prijaviš
 

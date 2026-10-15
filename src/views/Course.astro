@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import PageHead from "../components/PageHead.astro";
 import Photo from "../components/Photo.astro";
 import Form from "../components/Form.astro";
+import LanguageShowcase from "../components/LanguageShowcase.astro";
 import { t, url, fill, type Lang } from "../i18n";
 import { courseKeys, type CourseKey } from "../i18n/routes";
 import { site } from "../data/site";
@@ -13,6 +14,7 @@ const d = t(lang);
 const c = d.courses[course];
 const meta = d.meta[course];
 const subtitle = "subtitle" in c ? (c.subtitle as string) : undefined;
+const showcase = "showcase" in c ? c.showcase : undefined; // language courses only
 
 const courseLd = {
   "@context": "https://schema.org",
@@ -45,7 +47,7 @@ const courseLd = {
             ))}
           </ul>
         </nav>
-        <div class="form-card side-form">
+        <div class="form-card side-form" id="apply">
           {c.form === "mfa" ? (
             <h2>{d.forms.mfaTitle}</h2>
           ) : (
@@ -63,6 +65,7 @@ const courseLd = {
         <div class="intro" style="margin-top:24px">
           {c.intro.map((p) => <p>{fill(p, lang)}</p>)}
         </div>
+        {showcase && <LanguageShowcase data={showcase} />}
         {c.blocks.map((b) => (
           <>
             <h2>{b.title}</h2>

@@ -1,0 +1,147 @@
+---
+/**
+ * Language courses page: shows that MASOK teaches many languages, not just German.
+ * - A greeting that cycles through the languages ("Hallo", "Hola", "Ciao" …)
+ * - A wall of language tiles (greeting + language name)
+ * - A "Your language?" tile that jumps to the enquiry form
+ * - Four "Tailored to you" cards (language, level, pace, goal)
+ * Text lives in src/i18n/*.ts under courses.german.showcase. Motion is off with reduced-motion settings.
+ */
+import Icon from "./Icon.astro";
+
+interface Showcase {
+  greetings: readonly string[];
+  title: string;
+  lead: string;
+  languages: readonly { greet: string; name: string; tag: string }[];
+  moreTitle: string;
+  moreText: string;
+  moreCta: string;
+  tailoredTitle: string;
+  tailored: readonly { icon: string; title: string; text: string }[];
+}
+interface Props { data: Showcase }
+const { data: S } = Astro.props;
+const greetings = [...S.greetings, S.greetings[0]]; // first one repeated so the loop is seamless
+---
+
+<section class="lang-showcase" aria-labelledby="lang-showcase-title">
+  <p class="greet-rotator" aria-hidden="true">
+    <span class="greet-track" style={`--n:${S.greetings.length}`}>
+      {greetings.map((g) => <span>{g}</span>)}
+    </span>
+  </p>
+  <h2 id="lang-showcase-title">{S.title}</h2>
+  <p class="lang-lead">{S.lead}</p>
+
+  <ul class="grid lang-grid" role="list">
+    {S.languages.map((l) => (
+      <li class:list={["lang-tile", { core: l.tag }]}>
+        {l.tag && <span class="lang-tag">{l.tag}</span>}
+        <span class="lang-greet" lang="und">{l.greet}</span>
+        <span class="lang-name">{l.name}</span>
+      </li>
+    ))}
+    <li class="lang-tile lang-more">
+      <a href="#apply">
+        <span class="lang-plus" aria-hidden="true">+</span>
+        <span class="lang-more-title">{S.moreTitle}</span>
+        <span class="lang-more-text">{S.moreText}</span>
+        <span class="lang-more-cta">{S.moreCta} →</span>
+      </a>
+    </li>
+  </ul>
+
+  <h2>{S.tailoredTitle}</h2>
+  <ul class="grid tailored-grid" role="list">
+    {S.tailored.map((c) => (
+      <li class="card tailored-card">
+        <div class="icon-box icon-yellow"><Icon name={c.icon} /></div>
+        <h3>{c.title}</h3>
+        <p>{c.text}</p>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .lang-showcase {
+    margin: 36px 0 12px; padding: 32px 28px; border-radius: var(--radius);
+    background: var(--bg-soft); border: 1px solid var(--border);
+  }
+  .lang-showcase h2 { margin-top: 0; }
+  .lang-showcase h2 + .lang-lead { margin-bottom: 28px; }
+  .lang-lead { font-size: 1.05rem; color: var(--dark); max-width: 62ch; }
+
+  /* Cycling greeting: a vertical strip of words that steps up one word every 2 s */
+  .greet-rotator {
+    margin: 0 0 10px; height: 1.25em; overflow: hidden; display: inline-block;
+    font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.25; color: var(--yellow-dark);
+  }
+  .greet-track { display: flex; flex-direction: column; animation: greet-cycle calc(var(--n) * 2s) infinite; }
+  .greet-track span { height: 1.25em; }
+  @keyframes greet-cycle {
+    0%, 9% { translate: 0 0; }
+    12.5%, 21.5% { translate: 0 -1.25em; }
+    25%, 34% { translate: 0 -2.5em; }
+    37.5%, 46.5% { translate: 0 -3.75em; }
+    50%, 59% { translate: 0 -5em; }
+    62.5%, 71.5% { translate: 0 -6.25em; }
+    75%, 84% { translate: 0 -7.5em; }
+    87.5%, 96.5% { translate: 0 -8.75em; }
+    100% { translate: 0 -10em; }
+  }
+
+  /* Language tiles */
+  .lang-grid {
+    list-style: none; padding: 0; margin: 0 0 40px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 14px;
+  }
+  .lang-tile {
+    position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px;
+    min-height: 118px; padding: 18px 16px 16px; border-radius: var(--radius);
+    background: var(--white); border: 1px solid var(--border); border-top: 4px solid var(--navy);
+    box-shadow: var(--shadow); transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
+  }
+  .lang-tile:nth-child(3n + 2) { border-top-color: var(--yellow); }
+  .lang-tile:nth-child(3n) { border-top-color: #4f6bb8; }
+  .lang-tile:not(.lang-more):hover { transform: translateY(-4px); background: var(--navy); box-shadow: 0 10px 24px rgba(20, 28, 60, .18); }
+  .lang-greet { font-size: 1.65rem; font-weight: 700; line-height: 1.1; color: var(--navy); transition: color .2s ease; }
+  .lang-name { font-size: .92rem; color: var(--muted); transition: color .2s ease; }
+  .lang-tile:hover .lang-greet { color: var(--yellow); }
+  .lang-tile:hover .lang-name { color: var(--white); }
+  .lang-tile.core { border-top-color: var(--yellow-dark); }
+  .lang-tag {
+    position: absolute; top: 10px; right: 10px; font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+    padding: 2px 8px; border-radius: 999px; background: var(--yellow); color: var(--navy);
+  }
+
+  /* "Your language?" tile */
+  .lang-more { grid-column: span 2; padding: 0; border: 2px dashed var(--navy); border-top-width: 2px; background: transparent; box-shadow: none; }
+  .lang-more a {
+    display: flex; flex-direction: column; justify-content: center; gap: 4px; height: 100%; padding: 16px 18px;
+    text-decoration: none; color: var(--navy); border-radius: var(--radius); transition: background-color .2s ease;
+  }
+  .lang-more a:hover, .lang-more a:focus-visible { background: rgba(232, 193, 66, .22); }
+  .lang-plus { font-size: 1.8rem; font-weight: 700; line-height: 1; color: var(--yellow-dark); }
+  .lang-more-title { font-size: 1.2rem; font-weight: 700; }
+  .lang-more-text { font-size: .9rem; color: var(--dark); }
+  .lang-more-cta { font-size: .92rem; font-weight: 700; margin-top: 4px; }
+  @media (max-width: 420px) { .lang-more { grid-column: 1 / -1; } }
+
+  /* Tailored-to-you cards */
+  .tailored-grid { list-style: none; padding: 0; margin: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 520px) { .tailored-grid { grid-template-columns: 1fr; } }
+  .tailored-card { padding: 22px 20px; }
+  .tailored-card .icon-box { margin: 0 0 12px; width: 52px; height: 52px; }
+  .tailored-card .icon-box :global(svg) { width: 30px; height: 30px; }
+  .tailored-card h3 { margin: 0 0 6px; font-size: 1.05rem; color: var(--navy); }
+  .tailored-card p { margin: 0; font-size: .92rem; color: var(--muted); }
+
+  @media (max-width: 600px) { .lang-showcase { padding: 24px 16px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .greet-track { animation: none; }
+    .lang-tile, .lang-greet, .lang-name { transition: none; }
+    .lang-tile:not(.lang-more):hover { transform: none; }
+  }
+</style>
