@@ -81,7 +81,7 @@ export const people = {
   },
   sabina: {
     name: "Sabina Banda",
-    role: { sr: "Osnivač", en: "Founder" },
+    role: { sr: "Konsultant", en: "Consultant" },
     email: "",
     phone: "",
     photo: "sabina-banda",
