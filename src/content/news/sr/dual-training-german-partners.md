@@ -12,4 +12,4 @@ Akademija MASOK obučava po nemačkim standardima kvaliteta. Teorija u Akademiji
 
 Naši polaznici u okviru programa intenzivno uče nemački jezik, a pružamo im i direktnu vezu sa poslodavcima.
 
-Imaš pitanje? [Piši nam ili nas pozovi](/sr/kontakt).
+Nemačke kompanije zainteresovane za saradnju sa nama mogu da saznaju više na našoj [stranici za nemačke partnere](/sr/za-nemacke-partnere).

@@ -75,7 +75,7 @@ const sr: Dict = {
     },
     german: {
       title: "Kursevi stranih jezika u Leskovcu – engleski, španski, italijanski, nemački i drugi | Akademija MASOK",
-      description: "Kursevi stranih jezika za sve u Leskovcu: danski, engleski, francuski, italijanski, nemački, ruski, španski i srpski za strance – prilagođeni vašem nivou, rasporedu i ciljevima.",
+      description: "Kursevi stranih jezika za sve u Leskovcu: danski, engleski, francuski, nemački, italijanski, ruski, španski i srpski za strance – prilagođeni vašem nivou, rasporedu i ciljevima.",
     },
     applicants: {
       title: "Za kandidate – kako se prijaviti | Akademija MASOK",
@@ -260,8 +260,8 @@ const sr: Dict = {
           { greet: "Hej", name: "Danski", tag: "" },
           { greet: "Hello", name: "Engleski", tag: "" },
           { greet: "Bonjour", name: "Francuski", tag: "" },
-          { greet: "Ciao", name: "Italijanski", tag: "" },
           { greet: "Hallo", name: "Nemački", tag: "" },
+          { greet: "Ciao", name: "Italijanski", tag: "" },
           { greet: "Привет", name: "Ruski", tag: "" },
           { greet: "Zdravo", name: "Srpski za strance", tag: "" },
           { greet: "¡Hola!", name: "Španski", tag: "" },
@@ -281,7 +281,7 @@ const sr: Dict = {
         {
           title: "Jezici",
           items: [
-            "Danski, engleski, francuski, italijanski, nemački, ruski i španski",
+            "Danski, engleski, francuski, nemački, italijanski, ruski i španski",
             "Srpski za strance",
             "Drugi jezici na upit",
           ],
@@ -347,7 +347,7 @@ const sr: Dict = {
       ],
       technician: ["Program u pripremi – prijavite interesovanje"],
       german: [
-        "Danski, engleski, francuski, italijanski, nemački, ruski, španski, srpski za strance – i drugi na upit",
+        "Danski, engleski, francuski, nemački, italijanski, ruski, španski, srpski za strance – i drugi na upit",
         "Svi nivoi, besplatno ulazno testiranje", "Male grupe ili individualna nastava",
         "Cena na upit", "Sertifikat Akademije o završenom nivou",
       ],

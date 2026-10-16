@@ -8,7 +8,7 @@ imageAlt: "Gomila knjiga"
 sample: true
 ---
 
-Kursevi stranih jezika u Akademiji MASOK otvoreni su za sve zainteresovane – uključujući danski, engleski, francuski, italijanski, nemački, ruski, španski i srpski za strance, a drugi jezici su dostupni na upit. Nastava se izvodi u malim grupama ili individualno, sa iskusnim predavačima.
+Kursevi stranih jezika u Akademiji MASOK otvoreni su za sve zainteresovane – uključujući danski, engleski, francuski, nemački, italijanski, ruski, španski i srpski za strance, a drugi jezici su dostupni na upit. Nastava se izvodi u malim grupama ili individualno, sa iskusnim predavačima.
 
 ## Nivoi i oblici nastave
 
